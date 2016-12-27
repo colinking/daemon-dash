@@ -1,31 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 
-let nodeModules = {};
-fs.readdirSync('node_modules').filter(x => {
-  return ['.bin'].indexOf(x) === -1;
-}).forEach(mod => {
-  nodeModules[mod] = 'commonjs ' + mod;
-});
-
 module.exports = {
-  entry: path.resolve(__dirname, 'server/server.js'),
-  target: 'node',
-  externals: nodeModules,
+  entry: path.resolve(__dirname, 'client/main.jsx'),
 
   output: {
     path: path.resolve(__dirname, 'dist/'),
-    filename: 'server.bundle.js'
+    filename: 'bundle.js'
   },
 
   module: {
     loaders: [{
-      loader: 'json-loader',
-      test: /\.json$/
-    }, {
-      test: /\.js$/,
+      test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel-loader',
+      loader: 'babel',
       query: {
         presets: ['react', 'es2015']
       }
