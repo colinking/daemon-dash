@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 /*
  * Run the bundled server code in production, and run the runtime-generated
  * server code in development.
@@ -7,3 +9,4 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   require('./server/server.js');
 }
+/* eslint-enable global-require */

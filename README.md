@@ -26,8 +26,8 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [ ] Have continuous integration for testing (e.g. [TravisCI](https://travis-ci.com/)).
 
 ## Linting
-- [ ] Include a static linter (e.g. [ESLint](http://eslint.org/)).
-- [ ] Use a linting configuration (`.eslintrc`) with good standards ([Airbnb](https://www.npmjs.com/package/eslint-config-airbnb)).
+- [x] Include a static linter (e.g. [ESLint](http://eslint.org/)).
+- [x] Use a linting configuration (`.eslintrc`) with good standards ([Airbnb](https://www.npmjs.com/package/eslint-config-airbnb)).
 - [ ] It would be nice to have lint errors prevent commits from registering.
 
 ## Database
