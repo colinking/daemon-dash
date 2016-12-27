@@ -28,6 +28,10 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [ ] Use a linting configuration (`.eslintrc`) with good standards ([Airbnb](https://www.npmjs.com/package/eslint-config-airbnb)).
 - [ ] It would be nice to have lint errors prevent commits from registering.
 
+## Database
+- [ ] Add [MongoDB](https://www.mongodb.com/) support via [Mongoose](http://mongoosejs.com/) (lol).
+- [ ] Include some database boilerplate code (e.g. schemas).
+
 ## Miscelaneous
 - [ ] Organize the directory structure of the repo to be more scalable/neat.
 - [ ] All runtime errors (testing, server, client) should be clearly labelled (e.g. line numbers and code) in dev.
