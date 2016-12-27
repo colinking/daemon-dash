@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 
 module.exports = {
@@ -6,7 +5,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist/'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   module: {
@@ -15,8 +14,8 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel',
       query: {
-        presets: ['react', 'es2015']
-      }
-    }]
-  }
+        presets: ['react', 'es2015'],
+      },
+    }],
+  },
 };
