@@ -18,7 +18,7 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [x] The build scripts should have a watch option to rebuild automatically on file change.
 - [ ] The build output should have a meaningful directory organization (if applicable).
 - [ ] Minify client-side JS (e.g. [UglifyJS](https://github.com/mishoo/UglifyJS2)) in prod (but not dev) if possible.
-- [ ] Have an automatic deploy (via [Heroku](https://www.heroku.com/) or some similar means).
+- [x] Have an automatic deploy (via [Heroku](https://www.heroku.com/) or some similar means).
 
 ## Testing Code
 - [ ] Any testing code should not have friction with the build system. For instance, it should be ES6 and work with Babel.
