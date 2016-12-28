@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run prod",
-    "dev": "nodemon index.js --exec babel-node",
+    "dev": "NODE_ENV=development nodemon index.js --exec babel-node",
     "prod": "NODE_ENV=production node index.js",
     "build": "npm run build:server && npm run build:client",
     "build:server": "webpack --config webpack.config.server.js",
