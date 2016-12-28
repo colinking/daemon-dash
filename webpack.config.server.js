@@ -26,10 +26,11 @@ module.exports = {
   module: {
     loaders: [{
       loader: 'json-loader',
+      include: /server/,
       test: /\.json$/,
     }, {
       test: /\.js$/,
-      exclude: /node_modules/,
+      include: /server/,
       loader: 'babel-loader',
       query: {
         presets: ['react', 'es2015'],
