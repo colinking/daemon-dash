@@ -9,7 +9,7 @@ Below are goals that I want in this boilerplate repo's functionality.
 ## Client Code
 - [ ] Client code in development should be in its native form as much as possible for easier debugging.
 - [x] The client-side JS should fully support [JSX](https://jsx.github.io/) syntax.
-- [ ] The client-side HTML should fully support [Jade/Pug](https://pugjs.org/api/getting-started.html) (debateable).
+- [x] The client-side HTML should fully support [Jade/Pug](https://pugjs.org/api/getting-started.html) (debateable).
 - [ ] The client-side CSS should fully support [SASS](http://sass-lang.com/) syntax.
 
 ## Webpack, Build System, and Deploy
