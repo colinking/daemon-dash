@@ -1,2 +1,5 @@
 dist
 node_modules
+index.js
+webpack.config.js
+webpack.config.server.js

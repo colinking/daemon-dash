@@ -14,7 +14,7 @@
     "watch": "webpack --watch",
     "clean": "rm -rf ./dist/",
     "test": "mocha --compilers js:babel-core/register",
-    "lint": "eslint --ext .js --ext .jsx *.js client server || true"
+    "lint": "eslint --ext .js --ext .jsx client server || true"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
