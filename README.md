@@ -1,5 +1,7 @@
 # Boilerplate Tasks
 
+[![Build Status](https://travis-ci.com/MrPickles/boilerplate.svg?token=HL4GfADW1tek1pK4Skh9&branch=master)](https://travis-ci.com/MrPickles/boilerplate)
+
 Below are goals that I want in this boilerplate repo's functionality.
 
 ## Server Code
@@ -23,7 +25,7 @@ Below are goals that I want in this boilerplate repo's functionality.
 ## Testing Code
 - [ ] Any testing code should not have friction with the build system. For instance, it should be ES6 and work with Babel.
 - [ ] Test code should be able to be in the same directory as the code it tests, not just a universal `test/` directory.
-- [ ] Have continuous integration for testing (e.g. [TravisCI](https://travis-ci.com/)).
+- [x] Have continuous integration for testing (e.g. [TravisCI](https://travis-ci.com/)).
 
 ## Linting
 - [x] Include a static linter (e.g. [ESLint](http://eslint.org/)).
