@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
 
-import styles from './main.css';
+import './main.css';
+
+import Paragraph from './modules/Paragraph';
 
 ReactDOM.render((
-  <div className={styles.reactParagraph}>
-    <p>This is a paragraph generated via React.</p>
-  </div>
+  <Router history={browserHistory}>
+    <Route path="*" component={Paragraph} />
+  </Router>
 ), document.getElementById('root'));
