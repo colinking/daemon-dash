@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 
 import './main.css';
 
-import Paragraph from './modules/Paragraph';
+import routes from './routes';
 
 ReactDOM.render((
   <Router history={browserHistory}>
-    <Route path="*" component={Paragraph} />
+    {routes}
   </Router>
 ), document.getElementById('root'));
