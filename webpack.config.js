@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
@@ -35,17 +36,10 @@ const config = {
   ],
 };
 
-const nodeModules = {};
-fs.readdirSync('node_modules')
-  .filter(x => ['.bin'].indexOf(x) === -1)
-  .forEach((mod) => {
-    nodeModules[mod] = `commonjs ${mod}`;
-  });
-
 const serverConfig = {
   entry: path.resolve(__dirname, 'server/server.js'),
   target: 'node',
-  externals: nodeModules,
+  externals: [nodeExternals()],
 
   node: {
     __dirname: false,
