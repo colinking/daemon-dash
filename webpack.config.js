@@ -51,18 +51,22 @@ const serverConfig = {
     filename: 'server.bundle.js',
   },
 
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+
   module: {
     loaders: [{
-      loader: 'json-loader',
-      include: /server/,
-      test: /\.json$/,
-    }, {
-      test: /\.js$/,
-      include: /server/,
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
         presets: ['react', 'es2015'],
       },
+    }, {
+      test: /\.css$/,
+      include: /client/,
+      loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
     }],
   },
 };

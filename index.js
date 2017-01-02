@@ -7,6 +7,7 @@
 if (process.env.NODE_ENV === 'production') {
   require('./dist/server.bundle.js');
 } else {
+  require('css-modules-require-hook/preset');
   require('./server/server.js');
 }
 /* eslint-enable global-require */

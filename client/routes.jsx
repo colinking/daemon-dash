@@ -1,10 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
-import Paragraph from './modules/Paragraph';
+import Paragraph from './modules/Paragraph/Paragraph';
+import NotFoundPage from './modules/NotFoundPage';
+import Layout from './modules/Layout';
 
 export default (
-  <Route path="/" component={Paragraph}>
-    <Route path="*" component={Paragraph} />
+  <Route path="/" component={Layout}>
+    <IndexRoute component={Paragraph} />
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );

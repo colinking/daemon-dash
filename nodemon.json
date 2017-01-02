@@ -6,7 +6,8 @@
   ],
   "verbose": true,
   "watch": [
-    "server"
+    "server",
+    "dist/server.bundle.js"
   ],
   "env": {
     "NODE_ENV": "development"
