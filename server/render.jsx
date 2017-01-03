@@ -24,6 +24,10 @@ export default (req, res) => {
       res.status(500);
       markup = renderToString(<ErrorPage />);
     } else if (renderProps) {
+      // Give 404 status code if we're supposed to render a 404 page.
+      if (renderProps.components.indexOf(NotFoundPage) !== -1) {
+        res.status(404);
+      }
       markup = renderToString(<RouterContext {...renderProps} />);
     } else {
       res.status(404);
