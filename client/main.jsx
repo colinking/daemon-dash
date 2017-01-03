@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 
-import './main.css';
+import './global.scss';
 
 import routes from './routes';
 

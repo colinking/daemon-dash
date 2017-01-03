@@ -12,11 +12,11 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [ ] Client code in development should be in its native form as much as possible for easier debugging.
 - [x] The client-side JS should fully support [JSX](https://jsx.github.io/) syntax.
 - [x] The client-side HTML should fully support [Jade/Pug](https://pugjs.org/api/getting-started.html) (debateable).
-- [ ] The client-side CSS should fully support [SASS](http://sass-lang.com/) syntax.
+- [x] The client-side CSS should fully support [SASS](http://sass-lang.com/) syntax.
 
 ## Webpack, Build System, and Deploy
 - [x] Webpack server scripts should build ES6 server code.
-- [ ] Webpack client scripts should build ES6/JSX/SASS code.
+- [x] Webpack client scripts should build ES6/JSX/SASS code.
 - [x] The build scripts should have a watch option to rebuild automatically on file change.
 - [ ] The build output should have a meaningful directory organization (if applicable).
 - [ ] Minify client-side JS (e.g. [UglifyJS](https://github.com/mishoo/UglifyJS2)) in prod (but not dev) if possible.

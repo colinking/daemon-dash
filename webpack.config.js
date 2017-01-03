@@ -23,10 +23,11 @@ const config = {
         presets: ['react', 'es2015'],
       },
     }, {
-      test: /\.css$/,
+      test: /\.scss$/,
       include: /client/,
       loader: ExtractTextPlugin.extract('style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader'),
     }],
   },
 
@@ -63,9 +64,9 @@ const serverConfig = {
         presets: ['react', 'es2015'],
       },
     }, {
-      test: /\.css$/,
+      test: /\.scss$/,
       include: /client/,
-      loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+      loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader',
     }],
   },
 };

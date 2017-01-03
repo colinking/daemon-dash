@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './Paragraph.css';
+import styles from './Paragraph.scss';
 
 export default function Paragraph() {
   return (
