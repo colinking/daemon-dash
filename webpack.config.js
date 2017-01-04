@@ -7,8 +7,8 @@ const config = {
   entry: path.resolve(__dirname, 'client/main.jsx'),
 
   output: {
-    path: path.resolve(__dirname, 'dist/'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist/public/'),
+    filename: 'js/bundle.js',
   },
 
   resolve: {
@@ -24,8 +24,7 @@ const config = {
         presets: ['react', 'es2015'],
       },
     }, {
-      test: /\.scss$/,
-      include: /client/,
+      test: /\.s?css$/,
       loader: ExtractTextPlugin.extract('style-loader',
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
           'sass-loader'),
@@ -33,7 +32,7 @@ const config = {
   },
 
   plugins: [
-    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new ExtractTextPlugin('css/style.css', { allChunks: true }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
@@ -70,7 +69,7 @@ const serverConfig = {
         presets: ['react', 'es2015'],
       },
     }, {
-      test: /\.scss$/,
+      test: /\.s?css$/,
       include: /client/,
       loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader',
     }],
