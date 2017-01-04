@@ -4,6 +4,10 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
+  // Include source map in development.
+  devtool: (process.env.NODE_ENV === 'development' ?
+            'eval-source-map' : 'hidden-source-map'),
+
   entry: path.resolve(__dirname, 'client/main.jsx'),
 
   output: {
