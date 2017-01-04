@@ -32,6 +32,7 @@ const config = {
       test: /\.s?css$/,
       loader: ExtractTextPlugin.extract('style-loader',
           'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'resolve-url-loader',
           'sass-loader?sourceMap'),
     }],
   },
