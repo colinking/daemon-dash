@@ -9,7 +9,7 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [x] Server code in dev should ideally be compiled on the fly for easier debugging.
 
 ## Client Code
-- [ ] Client code in development should be in its native form as much as possible for easier debugging.
+- [x] Client code in development should be in its native form as much as possible for easier debugging.
 - [x] The client-side JS should fully support [JSX](https://jsx.github.io/) syntax.
 - [x] The client-side HTML should fully support [Jade/Pug](https://pugjs.org/api/getting-started.html) (debateable).
 - [x] The client-side CSS should fully support [SASS](http://sass-lang.com/) syntax.
@@ -18,8 +18,8 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [x] Webpack server scripts should build ES6 server code.
 - [x] Webpack client scripts should build ES6/JSX/SASS code.
 - [x] The build scripts should have a watch option to rebuild automatically on file change.
-- [ ] The build output should have a meaningful directory organization (if applicable).
-- [ ] Minify client-side JS (e.g. [UglifyJS](https://github.com/mishoo/UglifyJS2)) in prod (but not dev) if possible.
+- [x] The build output should have a meaningful directory organization (if applicable).
+- [x] Minify client-side JS (e.g. [UglifyJS](https://github.com/mishoo/UglifyJS2)) in prod (but not dev) if possible.
 - [x] Have an automatic deploy (via [Heroku](https://www.heroku.com/) or some similar means).
 
 ## Testing Code
@@ -38,7 +38,7 @@ Below are goals that I want in this boilerplate repo's functionality.
 
 ## Miscelaneous
 - [ ] Organize the directory structure of the repo to be more scalable/neat.
-- [ ] All runtime errors (testing, server, client) should be clearly labelled (e.g. line numbers and code) in dev.
+- [x] All runtime errors (testing, server, client) should be clearly labelled (e.g. line numbers and code) in dev.
 - [ ] A dev/debugging panel would be a nice luxury for development.
 - [ ] Add environment and/or general configuration files/directory.
 - [ ] Migrate this task list to be separate issues as this codebase matures.
