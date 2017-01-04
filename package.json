@@ -7,9 +7,9 @@
     "start": "npm run build && npm run prod",
     "dev": "NODE_ENV=development nodemon index.js --exec babel-node",
     "prod": "NODE_ENV=production node index.js",
-    "build": "webpack -p",
+    "build": "NODE_ENV=production webpack -p",
     "postinstall": "npm run build",
-    "watch": "webpack --watch",
+    "watch": "NODE_ENV=development webpack --watch",
     "clean": "rm -rf ./dist/",
     "test": "mocha --compilers js:babel-core/register",
     "lint": "eslint --ext .js --ext .jsx client server || true"
