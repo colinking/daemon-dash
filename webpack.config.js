@@ -6,7 +6,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = {
   // Include source map in development.
   devtool: (process.env.NODE_ENV === 'development' ?
-            'eval-source-map' : 'hidden-source-map'),
+            'inline-source-map' : 'hidden-source-map'),
+  debug: true,
 
   entry: path.resolve(__dirname, 'client/main.jsx'),
 
@@ -30,8 +31,8 @@ const config = {
     }, {
       test: /\.s?css$/,
       loader: ExtractTextPlugin.extract('style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-          'sass-loader'),
+          'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader?sourceMap'),
     }],
   },
 
