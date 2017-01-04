@@ -12,7 +12,7 @@
     "watch": "NODE_ENV=development webpack --watch",
     "clean": "rm -rf ./dist/",
     "test": "mocha --compilers js:babel-core/register",
-    "lint": "eslint --ext .js --ext .jsx client server || true"
+    "lint": "eslint --ext .js --ext .jsx index.js client server"
   },
   "repository": {
     "type": "git",
