@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import compression from 'compression';
 
 import render from './render';
 
@@ -8,6 +9,8 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
+
+app.use(compression());
 app.use('/public', express.static(path.join(__dirname, '../dist/public')));
 app.use('/public/css',
     express.static(path.join(__dirname, '../node_modules/semantic-ui-css')));
