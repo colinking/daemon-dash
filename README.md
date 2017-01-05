@@ -23,8 +23,8 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [x] Have an automatic deploy (via [Heroku](https://www.heroku.com/) or some similar means).
 
 ## Testing Code
-- [ ] Any testing code should not have friction with the build system. For instance, it should be ES6 and work with Babel.
-- [ ] Test code should be able to be in the same directory as the code it tests, not just a universal `test/` directory.
+- [x] Any testing code should not have friction with the build system. For instance, it should be ES6 and work with Babel.
+- [x] Test code should be able to be in the same directory as the code it tests, not just a universal `test/` directory.
 - [x] Have continuous integration for testing (e.g. [TravisCI](https://travis-ci.com/)).
 
 ## Linting
