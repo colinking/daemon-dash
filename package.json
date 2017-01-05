@@ -28,7 +28,9 @@
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
     "semantic-ui-css": "^2.2.4",
-    "semantic-ui-react": "^0.63.5"
+    "semantic-ui-react": "^0.63.5",
+    "socket.io": "^1.7.2",
+    "socket.io-client": "^1.7.2"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

@@ -1,10 +1,15 @@
 import express from 'express';
+import http from 'http';
 import path from 'path';
+import Socket from 'socket.io';
 import compression from 'compression';
 
 import render from './render';
+import websocket from './websocket';
 
 const app = express();
+const server = http.Server(app);
+const io = Socket(server);
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, '../views'));
@@ -17,8 +22,10 @@ app.use('/public/css',
 
 app.get('*', render);
 
-app.listen(app.get('port'), () => {
+server.listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
   console.log('Server listening on port %d in %s mode.',
       app.get('port'), process.env.NODE_ENV);
 });
+
+io.on('connection', websocket);
