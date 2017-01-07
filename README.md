@@ -33,12 +33,12 @@ Below are goals that I want in this boilerplate repo's functionality.
 - [ ] It would be nice to have lint errors prevent commits from registering.
 
 ## Database
-- [ ] Add [MongoDB](https://www.mongodb.com/) support via [Mongoose](http://mongoosejs.com/) (lol).
+- [x] Add [MongoDB](https://www.mongodb.com/) support via [Mongoose](http://mongoosejs.com/) (lol).
 - [ ] Include some database boilerplate code (e.g. schemas).
 
 ## Miscelaneous
 - [ ] Organize the directory structure of the repo to be more scalable/neat.
 - [x] All runtime errors (testing, server, client) should be clearly labelled (e.g. line numbers and code) in dev.
 - [ ] A dev/debugging panel would be a nice luxury for development.
-- [ ] Add environment and/or general configuration files/directory.
+- [x] Add environment and/or general configuration files/directory.
 - [ ] Migrate this task list to be separate issues as this codebase matures.
