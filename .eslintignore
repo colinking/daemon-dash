@@ -1,3 +1,4 @@
 dist
 node_modules
+cmrh.conf.js
 webpack.config.js
