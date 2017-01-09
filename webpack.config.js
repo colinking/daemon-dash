@@ -82,4 +82,7 @@ const serverConfig = {
   },
 };
 
-module.exports = [config, serverConfig];
+// Exclude server build in development.
+module.exports = (process.env.NODE_ENV === 'development'
+    ? config
+    : [config, serverConfig]);
