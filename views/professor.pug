@@ -1,5 +1,16 @@
 extends layout
 
+block styles
+  link(rel='stylesheet', href='/stylesheets/professor.css')
+
 block content
-  h1= title
-  p Welcome to #{title}
+  #container.ui.equal.width.center.aligned.grid
+    .column
+      #livestream.ui.segment
+        p livestream
+      #console.ui.segment
+        p output
+
+    .column
+      #code-editor.ui.segment
+        p code
