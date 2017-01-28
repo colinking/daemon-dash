@@ -1,44 +1,30 @@
-# Boilerplate Tasks
+# daemon-dash
 
-[![Build Status](https://travis-ci.com/MrPickles/boilerplate.svg?token=HL4GfADW1tek1pK4Skh9&branch=master)](https://travis-ci.com/MrPickles/boilerplate)
+# Setup
+```
+$ cp .env.example .env
+$ yarn install
+$ mongod
+$ npm watch
+$ npm run dev
+```
+# Daemon-Dash
 
-Below are goals that I want in this boilerplate repo's functionality.
+# Minimum Project Reqs
+* From a student’s view, the student is able to access a lecture stream from the browser.
+* The stream will have an accompanying editor.
+  * The editor only supports Java.
+  * The editor will update its own contents as the video progresses, as to synchronize with the lecture.
+  * The viewer may edit the code in the editor. If the viewer modified the code, the video will pause.
+    * If the viewer resumes the video, the editor will return to its original state that’s synchronized with the lecture.
+  * The viewer may run the code that’s in the editor at any time. The output will be displayed to the user on the browser.
+* From the professor’s view, when streaming, the professor will have access to a web IDE where he or she can type the code pertaining to the lecture.
+* The code will be synchronized with the stream.
+* UI must look nice on desktop.
 
-## Server Code
-- [x] Server code should be fully supported ES6 through [Babel](https://babeljs.io/).
-- [x] Server code in dev should ideally be compiled on the fly for easier debugging.
-
-## Client Code
-- [x] Client code in development should be in its native form as much as possible for easier debugging.
-- [x] The client-side JS should fully support [JSX](https://jsx.github.io/) syntax.
-- [x] The client-side HTML should fully support [Jade/Pug](https://pugjs.org/api/getting-started.html) (debateable).
-- [x] The client-side CSS should fully support [SASS](http://sass-lang.com/) syntax.
-
-## Webpack, Build System, and Deploy
-- [x] Webpack server scripts should build ES6 server code.
-- [x] Webpack client scripts should build ES6/JSX/SASS code.
-- [x] The build scripts should have a watch option to rebuild automatically on file change.
-- [x] The build output should have a meaningful directory organization (if applicable).
-- [x] Minify client-side JS (e.g. [UglifyJS](https://github.com/mishoo/UglifyJS2)) in prod (but not dev) if possible.
-- [x] Have an automatic deploy (via [Heroku](https://www.heroku.com/) or some similar means).
-
-## Testing Code
-- [x] Any testing code should not have friction with the build system. For instance, it should be ES6 and work with Babel.
-- [x] Test code should be able to be in the same directory as the code it tests, not just a universal `test/` directory.
-- [x] Have continuous integration for testing (e.g. [TravisCI](https://travis-ci.com/)).
-
-## Linting
-- [x] Include a static linter (e.g. [ESLint](http://eslint.org/)).
-- [x] Use a linting configuration (`.eslintrc`) with good standards ([Airbnb](https://www.npmjs.com/package/eslint-config-airbnb)).
-- [ ] It would be nice to have lint errors prevent commits from registering.
-
-## Database
-- [x] Add [MongoDB](https://www.mongodb.com/) support via [Mongoose](http://mongoosejs.com/) (lol).
-- [ ] Include some database boilerplate code (e.g. schemas).
-
-## Miscelaneous
-- [ ] Organize the directory structure of the repo to be more scalable/neat.
-- [x] All runtime errors (testing, server, client) should be clearly labelled (e.g. line numbers and code) in dev.
-- [ ] A dev/debugging panel would be a nice luxury for development.
-- [x] Add environment and/or general configuration files/directory.
-- [ ] Migrate this task list to be separate issues as this codebase matures.
+# Additional Project Features
+* The application should support recorded videos in addition to streams.
+* Students who edit code can opt to branch off from the original lecture code and save their changes.
+* In live streams, students can post questions to a Dory and vote as well. At the end of the lecture, the professor can answer the top questions.
+* Likewise, in videos, students can post questions attached to certain timestamps of the video, and these questions can be linked/posted to Piazza.
+* The code editor and runner can support additional languages.
