@@ -1,13 +1,24 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
 
 import styles from './LoginPage.scss';
 
-export default function Paragraph() {
+export default function LoginPage() {
   return (
-    <div className={styles.reactParagraph}>
-      <Button>This is a Semantic Ui Button.</Button>
-      <p>Login Test.</p>
-    </div>
+    <form action="/api/login" method="post">
+      <div className={styles.loginPanelParent}>
+        <div className={styles.loginPanel}>
+          <Input
+            className={styles.input} fluid icon="mail"
+            iconPosition="left" placeholder="Email address"
+          />
+          <Input
+            className={styles.input}
+            fluid icon="lock" iconPosition="left" placeholder="Password"
+          />
+          <Button fluid>Sign in</Button>
+        </div>
+      </div>
+    </form>
   );
 }
