@@ -1,0 +1,20 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/login.css')
+
+block content
+  .login-panel-parent
+    .login-panel
+      form.form-signin(action='/api/login', method='post')
+        include flash
+
+        .ui.left.icon.input.fluid
+          label.sr-only(for='inputEmail') Email address
+          input#inputEmail(type='email', placeholder='Email address', required='', autofocus='', name = 'email', value=submission.email)
+          i.users.icon
+        .ui.left.icon.input.fluid
+          label.sr-only(for='inputPassword') Password
+          input#inputPassword(type='password', placeholder='Password', required='', name = 'password', value=submission.password)
+          i.key.icon
+        button#submitInfo.fluid.ui.button(type='submit') Sign in

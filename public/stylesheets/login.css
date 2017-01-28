@@ -1,0 +1,23 @@
+
+body {
+  background-color: #1abc9c;
+}
+
+.login-panel-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-panel {
+  background-color: #edeff1;
+  padding: 24px 23px 20px;
+  border-radius: 6px;
+  max-width: 500px;
+  width: 100%;
+  margin: 10px;
+}
+
+.input {
+  margin-bottom: 10px;
+}
