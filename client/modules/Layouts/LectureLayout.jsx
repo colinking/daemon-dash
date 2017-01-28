@@ -10,7 +10,7 @@ export default function LectureLayout(props) {
         <p>TITLE HERE</p>
       </Segment>
       <Grid columns={2} divided>
-        <Grid.Column>
+        <Grid.Column className={styles.column}>
           <Grid.Row>
             {props.videoStream}
           </Grid.Row>
@@ -19,9 +19,8 @@ export default function LectureLayout(props) {
             {props.consoleOutput}
           </Grid.Row>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column className={styles.column}>
           <Grid.Row className={styles.codepad}>
-            <Image src='http://semantic-ui.com/images/wireframe/media-paragraph.png' />
             {props.codePad}
           </Grid.Row>
         </Grid.Column>
