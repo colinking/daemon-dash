@@ -12,6 +12,9 @@ const app = express();
 const server = http.Server(app);
 const io = Socket(server);
 
+// Server instance-unique webrtc room name.
+const roomNonce = Math.random().toString(36).substring(7);
+
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', () => {
   console.log('Database connection failed!'); // eslint-disable-line no-console
@@ -28,6 +31,10 @@ app.use('/public/css',
     express.static(path.join(__dirname, '../node_modules/semantic-ui-css')));
 
 app.get('*', render);
+
+app.post('/nonce', (req, res) => {
+  res.json({ nonce: roomNonce });
+});
 
 mongoose.connection.once('open', () => {
   server.listen(app.get('port'), () => {

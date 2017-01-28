@@ -1,16 +1,24 @@
 import React from 'react';
+import $ from 'jquery';
 
 export default class TeacherStream extends React.Component {
   componentDidMount() {
-		const webrtc = new SimpleWebRTC({
-			localVideoEl: 'localVideo',
-			autoRequestMedia: true
-		});
+    const webrtc = new SimpleWebRTC({
+      localVideoEl: 'localVideo',
+      autoRequestMedia: true
+    });
 
-		webrtc.on('readyToCall', () => {
-			console.log('joining room');
-			webrtc.joinRoom('test room');
-		});
+    webrtc.on('readyToCall', () => {
+      console.log('joining room');
+      $.ajax({
+        type: 'POST',
+        url: '/nonce',
+        success: (data) => {
+          webrtc.joinRoom(data.nonce);
+          console.log(data.nonce);
+        },
+      });
+    });
   }
 
   render() {
