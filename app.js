@@ -72,13 +72,31 @@ function isNotLoggedIn(req, res, next) {
   return (req.isAuthenticated() ? res.redirect('/') : next());
 }
 
+// middleware to check if the user is of the correct type (student/professor)
+function needsAccess(type, isAPI) {
+  const doRedirect = isAPI || false;
+  return function redirect(req, res, next) {
+    if (req.user && req.user.type === type) {
+      next();
+    } else if (doRedirect) {
+      // req.flash('dashboardFlash', {
+      //   text: 'You do not have access to this page.',
+      //   class: 'danger',
+      // });
+      res.redirect('/');
+    } else {
+      res.status(401).send('Unauthorized');
+    }
+  };
+}
+
 // Require that the user is not signed in
 app.get('/login', isNotLoggedIn, views.login);
 
 // Require that the user is signed in
 app.get('/', ensureLoggedIn('/login'), views.index);
-app.get('/student', ensureLoggedIn('/login'), views.student);
-app.get('/professor', ensureLoggedIn('/login'), views.professor);
+app.get('/student', ensureLoggedIn('/login'), needsAccess('student'), views.student);
+app.get('/professor', ensureLoggedIn('/login'), needsAccess('professor'), views.professor);
 
 // API methods
 app.post('/api/login', passport.authenticate('local-login', {
