@@ -2,6 +2,7 @@
 
 # Setup
 ```
+$ export SESSION_SECRET="<INSERT RANDOM ALPHANUMERIC STRING>"
 $ yarn install
 $ mongod
 $ npm start
