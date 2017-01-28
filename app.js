@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -8,6 +9,11 @@ const passport = require('passport');
 const session = require('express-session');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const flash = require('connect-flash');
+const dotenv = require('dotenv');
+
+if (fs.existsSync(path.join(__dirname, '.env'))) {
+  dotenv.config();
+}
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/shipit');
 mongoose.connection.on('error', (err) => {
