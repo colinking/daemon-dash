@@ -4,16 +4,15 @@ import { Route, IndexRoute } from 'react-router';
 import Paragraph from './modules/Paragraph/Paragraph';
 import NotFoundPage from './modules/NotFoundPage';
 import Layout from './modules/Layout';
-import LectureLayout from './modules/Layouts/LectureLayout';
-import StudentStream from './modules/Stream/StudentStream';
-import TeacherStream from './modules/Stream/TeacherStream';
+import StudentWrapper from './modules/Layouts/StudentWrapper';
+import TeacherWrapper from './modules/Layouts/TeacherWrapper';
 
 export default (
   <Route path="/" component={Layout}>
     <IndexRoute component={Paragraph} />
-    <Route path="stream" component={LectureLayout}>
-      <Route path="student" component={StudentStream} />
-      <Route path="teacher" component={TeacherStream} />
+    <Route path="stream">
+      <Route path="student" component={StudentWrapper} />
+      <Route path="teacher" component={TeacherWrapper} />
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Route>
