@@ -13,7 +13,7 @@ const path = require('path');
 /*
  * Load environment variables.
  */
-if (fs.existsSync(path.join(__dirname, '.env'))) {
+if (fs.existsSync(path.join(__dirname, '../.env'))) {
   dotenv.config();
 }
 
@@ -24,7 +24,7 @@ mongoose.connection.on('error', (err) => {
   }
 });
 
-const User = require('../models/user');
+const User = require('../server/models/user');
 
 function clearDatabase(cb) {
   // Clear the user database

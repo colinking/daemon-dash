@@ -9,6 +9,7 @@ import routes from './routes';
 
 const socket = IO();
 
+
 socket.on('connected', (data) => {
   console.log(data); // eslint-disable-line no-console
 });

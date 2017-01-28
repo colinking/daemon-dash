@@ -17,4 +17,11 @@ router.postLogout = (req, res) => {
   sendJSON(res, { redirect: '/login' });
 };
 
+router.getReq = (req, res) => {
+  sendJSON(res, {
+    isAuthenticated: req.isAuthenticated(),
+    type: (req.isAuthenticated() ? req.user.type : null),
+  });
+};
+
 export default router;
