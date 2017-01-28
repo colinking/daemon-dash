@@ -80,6 +80,8 @@ app.get('/', ensureLoggedIn('/login'), views.index);
 app.get('/student', ensureLoggedIn('/login'), views.student);
 app.get('/professor', ensureLoggedIn('/login'), views.professor);
 
+app.get('/stream', views.stream);
+
 // API methods
 app.post('/api/login', passport.authenticate('local-login', {
   successRedirect: '/',

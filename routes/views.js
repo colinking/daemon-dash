@@ -37,4 +37,11 @@ router.professor = (req, res) => {
   });
 };
 
+router.stream = (req, res) => {
+  res.render('stream', {
+    title: 'STREAM TEST',
+    hideNav: false,
+  });
+};
+
 module.exports = router;

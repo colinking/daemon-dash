@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  video#localVideo
+
+block scripts
+  script(src='https://simplewebrtc.com/latest-v2.js')
+  script(src='/js/stream.js')
