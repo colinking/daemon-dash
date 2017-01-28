@@ -8,9 +8,7 @@ const userSchema = new Schema({
   email: { type: String, index: { unique: true } },
   // initially set to plaintext password, then overwritten on save with hashed value
   hash: String,
-  type: { type: String, enum: ['patient', 'doctor'] },
-  // Only set for patients
-  medications: [Schema.Types.ObjectId]
+  type: { type: String, enum: ['student', 'professor'] },
 });
 
 function presave(callback) {

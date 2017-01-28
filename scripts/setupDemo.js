@@ -29,40 +29,28 @@ function clearDatabase(cb) {
 
 const userbase = [
   new User({
-    name: 'Doctor A',
-    email: 'doctora@test.com',
-    hash: 'doctora',
-    type: 'doctor',
+    name: 'Nelson',
+    email: 'nelson@example.com',
+    hash: 'nelson',
+    type: 'professor',
   }),
   new User({
-    name: 'Doctor B',
-    email: 'doctorB@test.com',
-    hash: 'doctorb',
-    type: 'doctor',
-  }),
-  new User({
-    name: 'Hannah Voelker',
-    email: 'hannahvoelker13@gmail.com',
-    hash: 'hannah',
-    type: 'patient',
-  }),
-  new User({
-    name: 'Alice Shi',
-    email: 'alice@umd.edu',
-    hash: 'alice',
-    type: 'patient',
+    name: 'Darshan Shah',
+    email: 'darshan@example.com',
+    hash: 'darshan',
+    type: 'student',
   }),
   new User({
     name: 'Colin King',
-    email: 'colin.king.96@gmail.com',
+    email: 'colin@example.com',
     hash: 'colin',
-    type: 'patient'
+    type: 'student'
   }),
   new User({
-    name: 'Sean Bae',
-    email: 's@seanbae.net',
-    hash: 'sean',
-    type: 'patient',
+    name: 'Craig Weiss',
+    email: 'craig@example.com',
+    hash: 'craig',
+    type: 'student',
   }),
 ];
 
