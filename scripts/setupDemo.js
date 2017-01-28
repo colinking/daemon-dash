@@ -7,7 +7,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect('<TODO>' || 'mongodb://localhost/shipit');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/shipit');
 mongoose.connection.on('error', (err) => {
   if (err) {
     console.log(err);

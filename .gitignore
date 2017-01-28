@@ -1,4 +1,5 @@
 uploads
+.env
 
 # Logs
 logs
