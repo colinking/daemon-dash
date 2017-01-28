@@ -1,0 +1,27 @@
+#code-editor{
+  height:100%;
+}
+
+#livestream {
+  height: 50%;
+}
+
+#console {
+  height: 50%;
+}
+
+#container, #container > .column {
+  height: 100%;
+}
+
+#livestream {
+  margin-bottom: 4px;
+}
+
+#console {
+  margin-top: 4px;
+}
+
+#container > .column {
+  padding: 2px;
+}
