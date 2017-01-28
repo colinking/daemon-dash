@@ -71,6 +71,8 @@ app.get('/login', isNotLoggedIn, views.login);
 
 // Require that the user is signed in
 app.get('/', ensureLoggedIn('/login'), views.index);
+app.get('/student', ensureLoggedIn('/login'), views.student);
+app.get('/professor', ensureLoggedIn('/login'), views.professor);
 
 // API methods
 app.post('/api/login', passport.authenticate('local-login', {
