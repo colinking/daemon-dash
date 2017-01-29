@@ -19,8 +19,8 @@ export default class LectureLayout extends React.Component {
 
   render() {
     return (
-      <div>
-        <Menu size="large">
+      <div className={styles.lectureLayout}>
+        <Menu size="large" className={styles.menuHeader}>
           <Menu.Item name="Shipit" />
 
           <Menu.Menu position="right">
@@ -29,16 +29,16 @@ export default class LectureLayout extends React.Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
-        <Grid columns={2} divided>
-          <Grid.Column className={styles.column}>
-            <Grid.Row>
+        <Grid columns={2} divided className={styles.grid}>
+          <Grid.Column className={styles.column1}>
+            <Grid.Row className={styles.videoPane}>
               {this.props.videoStream}
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row className={styles.outputPane}>
               {this.props.consoleOutput}
             </Grid.Row>
           </Grid.Column>
-          <Grid.Column className={styles.column}>
+          <Grid.Column className={styles.column2}>
             <Grid.Row className={styles.codepad}>
               {this.props.codePad}
             </Grid.Row>
