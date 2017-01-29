@@ -16,7 +16,7 @@ export default class LoginPage extends React.Component {
       success: ((resp) => {
         console.log(resp);
         if (!resp.error) {
-          browserHistory.push((resp.type === 'student' ? '/student' : '/professor'));
+          browserHistory.push((resp.type === 'student' ? '/stream/student' : '/stream/teacher'));
         } else {
           console.error(resp.error);
         }
@@ -24,12 +24,11 @@ export default class LoginPage extends React.Component {
     });
   }
 
-  componentDidMount() {
-    console.log('seoign');
-    $.ajax('/api/req', (resp) => {
+  componentWillMount() {
+    $.get('/api/req', (resp) => {
       console.log(resp);
       if (resp.isAuthenticated) {
-        browserHistory.push((resp.type === 'student' ? '/student' : '/professor'));
+        browserHistory.push((resp.type === 'student' ? '/stream/student' : '/stream/teacher'));
       }
     });
   }

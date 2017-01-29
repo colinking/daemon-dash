@@ -47,7 +47,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-// app.use(flash()); // use connect-flash for flash messages stored in session
 
 // pass passport for configuration
 require('./config/passport.js')(passport);
@@ -55,12 +54,7 @@ require('./config/passport.js')(passport);
 // API methods
 app.get('/api/req', api.getReq);
 app.post('/api/login', (req, res, next) => {
-  console.log(req.body);
-  console.log('authenticated?');
-  console.log(req.isAuthenticated());
   passport.authenticate('local', (err, user) => {
-    console.log(err);
-    console.log(user);
     if (!user) {
       return res.json({ error: 'Invalid credentials.' });
     }

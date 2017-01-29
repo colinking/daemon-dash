@@ -1,35 +1,24 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRedirect } from 'react-router';
 
+import ProfessorView from './modules/ProfessorView/ProfessorView';
+import StudentView from './modules/StudentView/StudentView';
 import NotFoundPage from './modules/NotFoundPage';
 import LoginPage from './modules/LoginPage/LoginPage';
-import StudentPage from './modules/StudentPage/StudentPage';
-import ProfessorPage from './modules/ProfessorPage/ProfessorPage';
 import Layout from './modules/Layout';
-
-// desiredAccess =
-// [ 'none' (default) | 'any' (login) | 'student' (login|default) | 'professor' (login|default) ]
-// function requireAuth(req, desiredAccess) {
-//   return (nextState, replace) => {
-//     if (!req.isAuthenticated) {
-//       if (desiredAccess !== 'none') {
-//         replace({
-//           pathname: '/login',
-//         });
-//       }
-//     } else if (desiredAccess !== req.user.type) {
-//       replace({
-//         pathname: (req.user.type === 'student' ? '/student' : '/professor'),
-//       });
-//     }
-//   };
-// }
+import StudentWrapper from './modules/Layouts/StudentWrapper';
+import TeacherWrapper from './modules/Layouts/TeacherWrapper';
 
 export default (
   <Route path="/" component={Layout}>
+    <IndexRedirect to="/login" />
     <Route path="login" component={LoginPage} />
-    <Route path="student" component={StudentPage} />
-    <Route path="professor" component={ProfessorPage} />
+    <Route path="/professorView" component={ProfessorView} />
+    <Route path="/studentView" component={StudentView} />
+    <Route path="stream">
+      <Route path="student" component={StudentWrapper} />
+      <Route path="teacher" component={TeacherWrapper} />
+    </Route>
     <Route path="*" component={NotFoundPage} />
   </Route>
 );

@@ -15,13 +15,11 @@ module.exports = (passport) => {
 
   // used to serialize the user for the session
   passport.serializeUser((user, done) => {
-    console.log('here');
     done(null, user.id);
   });
 
   // used to deserialize the user
   passport.deserializeUser((id, done) => {
-    console.log('here2');
     User.findById(id).lean().exec((err, user) => {
       done(err, user);
     });
@@ -40,13 +38,11 @@ module.exports = (passport) => {
     passReqToCallback: true,
   }, (req, rawEmail, password, done) => {
     const email = rawEmail.toLowerCase();
-    console.log(email);
-    console.log(password);
     User.findOne({ email }, (err, user) => {
       if (err) done(err);
       else if (!user) {
         req.session.submission = req.body;
-        done({ err: 'weiufew' }, false);
+        done({ err: 'Invalid login.' }, false);
       } else {
         user.comparePassword(password, (err2, valid) => {
           if (err) {
@@ -54,7 +50,7 @@ module.exports = (passport) => {
             done(err);
           } else if (!valid) {
             req.session.submission = req.body;
-            done({ err: 'wegwe' }, false);
+            done({ err: 'Invalid login!' }, false);
           } else done(null, user);
         });
       }
