@@ -29,10 +29,12 @@ export default class ConsoleFeed extends React.Component {
     // this.editor.renderer.setShowGutter(false);
     this.socket = io();
     this.socket.on('CODE_EXECUTED_' + uniqueGlobalId(), (text) => {
+      const time = new Date().toLocaleTimeString();
+      const top = `${time} (Exit Code: ${text.code})\n--------------------------`;
       if (text.err) {
-        this.editor.setValue(`${text.err.desc}\n${text.err.error}`, 1);
+        this.editor.setValue(`${top}\n${text.err.desc}\n${text.err.error}`, 1);
       } else {
-        this.editor.setValue(`${text.output}\n`, 1);
+        this.editor.setValue(`${top}\n${text.output}\n`, 1);
       }
     });
   }

@@ -12,6 +12,7 @@ export default class ArchiveStream extends React.Component {
   render() {
     return (
       <video
+        style={{ 'padding-left': '14px' }}
         src={this.videoURL}
         className={styles.vidObject}
         height="300"

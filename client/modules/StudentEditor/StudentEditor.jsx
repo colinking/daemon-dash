@@ -62,6 +62,16 @@ export default class StudentEditor extends React.Component {
     }
   }
 
+  langOnChange(event) {
+    console.log('changed lang (student)!');
+    const newLang = event.target.innerText.toLowerCase();
+    console.log(newLang);
+    // this.editor.getSession().setMode();
+    // Update editor with new language
+    // Store language as state somewhere?
+    this.setState({ mode: newLang });
+  }
+
   goToLive() {
     const x = Date.now();
     this.revisions[x] = this.getCode();
@@ -84,6 +94,7 @@ export default class StudentEditor extends React.Component {
   }
 
   render() {
+    console.log(`re-rendering student editor ${this.state.mode}`);
     return (
       <div className={styles.app}>
         <AceEditor
@@ -95,6 +106,8 @@ export default class StudentEditor extends React.Component {
           parOptions={this.state.options}
           parOnChange={this.reloadPastRevision.bind(this)}
           isStudent={'yes'}
+          mode={this.state.mode}
+          langOnChange={this.langOnChange.bind(this)}
 
           ref={(r) => { this.editor = r; }}
         />
@@ -102,3 +115,7 @@ export default class StudentEditor extends React.Component {
     );
   }
 }
+
+StudentEditor.defaultProps = {
+  mode: 'java',
+};
