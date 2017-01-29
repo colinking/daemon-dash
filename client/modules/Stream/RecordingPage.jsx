@@ -15,6 +15,45 @@ export default class RecordingPage extends React.Component {
     this.handleStopRecording = this.handleStopRecording.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.onMediaSuccess = this.onMediaSuccess.bind(this);
+    this.handleStartStreaming = this.handleStartStreaming.bind(this);
+    this.handleStopStreaming = this.handleStopStreaming.bind(this);
+
+    let mediaOptions = {
+      audio: false,
+      video: true,
+    };
+
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      let socket = io();
+      for (var i = 0; i !== devices.length; ++i) {
+        let device = devices[i];
+        if (device.kind === 'videoinput') {
+          if (device.label.indexOf('back') !== -1) {
+            mediaOptions.video = {
+              deviceId: device.deviceId
+            };
+          }
+        }
+      }
+
+     this.webrtc = new SimpleWebRTC({
+        localVideoEl: 'localVideo',
+        autoRequestMedia: true,
+        media: mediaOptions,
+      });
+
+      this.webrtc.on('readyToCall', () => {
+        $.ajax({
+          type: 'POST',
+          url: '/nonce',
+          success: (data) => {
+            this.nonce = data.nonce;
+            this.webrtc.joinRoom(this.nonce);
+          },
+        });
+      });
+    });
+
   }
 
 	onMediaSuccess(stream) {
@@ -89,42 +128,16 @@ export default class RecordingPage extends React.Component {
     this.mediaRecorder.save();
   }
 
-  componentDidMount() {
-    let mediaOptions = {
-      audio: true,
-      video: true,
-    };
+  handleStartStreaming() {
+    console.log('start!!!');
+    this.webrtc.joinRoom(this.nonce);
+    this.socket.emit('mobile attached', {});
+  }
 
-    navigator.mediaDevices.enumerateDevices().then(function (devices) {
-      let socket = io();
-      for (var i = 0; i !== devices.length; ++i) {
-        let device = devices[i];
-        if (device.kind === 'videoinput') {
-          if (device.label.indexOf('back') !== -1) {
-            mediaOptions.video = {
-              deviceId: device.deviceId
-            };
-          }
-        }
-      }
-
-     const webrtc = new SimpleWebRTC({
-        localVideoEl: 'localVideo',
-        autoRequestMedia: true,
-        media: mediaOptions,
-      });
-
-      webrtc.on('readyToCall', () => {
-        $.ajax({
-          type: 'POST',
-          url: '/nonce',
-          success: (data) => {
-            socket.emit('mobile attached', {});
-            webrtc.joinRoom(data.nonce);
-          },
-        });
-      });
-    });
+  handleStopStreaming() {
+    console.log('stop!!!');
+    this.webrtc.leaveRoom();
+    this.socket.emit('mobile detached', {});
   }
 
   render() {
@@ -135,9 +148,19 @@ export default class RecordingPage extends React.Component {
         <video style={style} height="100" id="localVideo"></video>
         <br />
         <br />
-        <Button onClick={this.handleStartRecording}>Start Recording</Button>
-        <Button onClick={this.handleStopRecording}>Stop Recording</Button>
-        <Button onClick={this.handleSave}>Save Recording</Button>
+        <Button size='massive' onClick={this.handleStartStreaming}>Start Streaming</Button>
+        <br />
+        <br />
+        <Button size='massive' onClick={this.handleStopStreaming}>Stop Streaming</Button>
+        <br />
+        <br />
+        <Button size='massive' onClick={this.handleStartRecording}>Start Recording</Button>
+        <br />
+        <br />
+        <Button size='massive' onClick={this.handleStopRecording}>Stop Recording</Button>
+        <br />
+        <br />
+        <Button size='massive' onClick={this.handleSave}>Save Recording</Button>
         <br />
         <br />
         <div id="vid-container"></div>

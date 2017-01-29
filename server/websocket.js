@@ -85,7 +85,10 @@ module.exports = (socket) => {
   });
 
   socket.on('mobile attached', () => {
-    console.log('mobile attached');
     socket.broadcast.emit('mobile attached');
+  });
+
+  socket.on('mobile attached', () => {
+    socket.broadcast.emit('mobile detached');
   });
 };
