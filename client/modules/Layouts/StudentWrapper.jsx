@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import LectureLayout from './LectureLayout';
 import StudentStream from '../Stream/StudentStream';
 
-import StudentView from '../StudentView/StudentView';
+import StudentEditor from '../StudentEditor/StudentEditor';
 
 export default class StudentWrapper extends React.Component {
 
@@ -20,7 +20,7 @@ export default class StudentWrapper extends React.Component {
 
   render() {
     return (
-      <LectureLayout videoStream={<StudentStream />} codePad={<StudentView />} />
+      <LectureLayout videoStream={<StudentStream />} codePad={<StudentEditor />} />
     );
   }
 }

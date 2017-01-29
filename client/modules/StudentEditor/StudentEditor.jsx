@@ -4,10 +4,10 @@ import $ from 'jquery';
 import { browserHistory } from 'react-router';
 import IO from 'socket.io-client';
 
-import styles from './StudentView.scss';
+import styles from './StudentEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
 
-export default class StudentView extends React.Component {
+export default class StudentEditor extends React.Component {
 
   constructor(props) {
     super(props);
