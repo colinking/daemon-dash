@@ -2,7 +2,9 @@ import React from 'react';
 // import { browserHistory } from 'react-router';
 // import $ from 'jquery';
 import { Button, Icon } from 'semantic-ui-react';
-import { socket } from '../globals';
+import io from 'socket.io-client';
+
+import {uniqueGlobalId} from '../../global'
 
 import styles from './EditorOptions.scss';
 
@@ -11,7 +13,8 @@ export default class EditorOptions extends React.Component {
   constructor(props) {
     super(props);
     this.executeCode = this.executeCode.bind(this);
-    socket.on('CODE_EXECUTED', (resp) => {
+    this.socket = io();
+    this.socket.on('CODE_EXECUTED', (resp) => {
       if (resp.err) {
         console.error(resp.err);
       } else {
@@ -21,7 +24,9 @@ export default class EditorOptions extends React.Component {
   }
 
   executeCode() {
-    socket.emit('EXECUTE_CODE', {
+    console.log(uniqueGlobalId());
+    this.socket.emit('EXECUTE_CODE', {
+      id: uniqueGlobalId(),
       code: this.props.getCode(),
       language: this.props.mode,
     });

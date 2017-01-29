@@ -16,7 +16,7 @@ module.exports = dataStream => (socket) => {
   });
 
     // Code execution endpoints
-  socket.on('EXECUTE_CODE', ({ code, language }) => {
+  socket.on('EXECUTE_CODE', ({ id, code, language }) => {
     console.log('Received code');
     console.log(code);
 
@@ -25,7 +25,7 @@ module.exports = dataStream => (socket) => {
       // Create build dir., if necessary
     mkdirp(directory, (mkdirErr) => {
       if (mkdirErr) {
-        socket.emit('CODE_EXECUTED', {
+        socket.broadcast.emit('CODE_EXECUTED_' + id, {
           err: {
             desc: 'Unable to create server build directory.',
             error: mkdirErr,
@@ -40,7 +40,7 @@ module.exports = dataStream => (socket) => {
         // Write user's code to tmp file in build directory
         fs.writeFile(javaFile, code, (writeFileErr) => {
           if (writeFileErr) {
-            socket.emit('CODE_EXECUTED', {
+            socket.broadcast.emit('CODE_EXECUTED_' + id, {
               err: {
                 desc: 'Unable to write code to build directory file.',
                 error: writeFileErr,
@@ -53,7 +53,7 @@ module.exports = dataStream => (socket) => {
             shell.exec(`javac ${javaFile}`, (compileExitCode, compileStdout, compileStderr) => {
               if (compileExitCode !== 0) {
                 shell.rm(filesToDelete);
-                socket.emit('CODE_EXECUTED', {
+                socket.broadcast.emit('CODE_EXECUTED_' + id, {
                   err: {
                     desc: 'Compilation failed.',
                     code: compileExitCode,
@@ -66,7 +66,7 @@ module.exports = dataStream => (socket) => {
                 shell.exec(`cd ${directory} && java ${filename}`, (runExitCode, runStdout, runStderr) => {
                   if (runExitCode !== 0) {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', {
+                    socket.broadcast.emit('CODE_EXECUTED_' + id, {
                       err: {
                         desc: 'Compilation failed.',
                         code: runExitCode,
@@ -75,7 +75,7 @@ module.exports = dataStream => (socket) => {
                     });
                   } else {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', { output: runStdout });
+                    socket.broadcast.emit('CODE_EXECUTED_' + id, { output: runStdout });
                   }
                 });
               }
