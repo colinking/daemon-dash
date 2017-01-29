@@ -3,7 +3,7 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const shell = require('shelljs');
 
-module.exports = dataStream => (socket) => {
+module.exports = (questions, dataStream) => (socket) => {
   socket.emit('PROFESSOR_CODE_EDITED', dataStream[dataStream.length - 1] || { text: '//no code' });
 
   socket.on('PROFESSOR_CODE_EDITED', (d) => {
@@ -150,10 +150,9 @@ module.exports = dataStream => (socket) => {
     socket.broadcast.emit('mobile detached');
   });
 
-  const questions = {};
-
   socket.on('qa fetchall', () => {
     const vals = [];
+    console.log(Object.keys(questions).length);
     Object.keys(questions).forEach((key) => {
       vals.push(questions[key]);
     });

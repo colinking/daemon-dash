@@ -12,6 +12,7 @@ import fs from 'fs';
 import render from './render';
 import websocket from './websocket';
 import api from './api';
+import questions from './fakedb';
 
 const app = express();
 const server = http.Server(app);
@@ -103,4 +104,4 @@ mongoose.connection.once('open', () => {
   });
 });
 
-io.on('connection', websocket(dataStream));
+io.on('connection', websocket(questions, dataStream));
