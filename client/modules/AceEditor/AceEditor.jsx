@@ -5,7 +5,7 @@ import { Select, Grid } from 'semantic-ui-react';
 
 import styles from './AceEditor.scss';
 
-import Execute from '../EditorOptions/EditorOptions';
+import EditorOptions from '../EditorOptions/EditorOptions';
 
 export default class AceEditor extends React.Component {
 
@@ -13,6 +13,7 @@ export default class AceEditor extends React.Component {
     super(props);
 
     this.updateTheme = this.updateTheme.bind(this);
+    this.getTest = this.getText.bind(this);
   }
 
   componentDidMount() {
@@ -103,7 +104,7 @@ export default class AceEditor extends React.Component {
           </Grid.Column>
           <Grid.Column className={styles.embedMenu}>
             <Grid.Row>
-              <Execute />
+              <EditorOptions getCode={this.getText}/>
             </Grid.Row>
           </Grid.Column>
         </Grid>

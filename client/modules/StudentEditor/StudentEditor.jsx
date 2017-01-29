@@ -6,7 +6,6 @@ import IO from 'socket.io-client';
 
 import styles from './StudentEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
-import EditorOptions from '../EditorOptions/EditorOptions';
 
 const LIVE = 'This code is from live.';
 const BRANCH = 'This code is locally modified.';
@@ -41,7 +40,7 @@ export default class StudentEditor extends React.Component {
       this.updateText(cl);
       this.setState({ status: LIVE });
     });
-    
+
     $.get('/api/req', (resp) => {
       if (!resp.isAuthenticated && resp.type !== 'professor') {
         browserHistory.push('/');

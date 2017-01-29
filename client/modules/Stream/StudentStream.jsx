@@ -13,7 +13,6 @@ export default class StudentStream extends React.Component {
       url: '/nonce',
       success: (data) => {
         webrtc.joinRoom(data.nonce);
-        console.log(data.nonce);
       },
     });
   }
