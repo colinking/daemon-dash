@@ -34,7 +34,7 @@ module.exports = (questions, dataStream) => (socket) => {
         });
       }
       if (language === 'java') {
-        const filename = 'Test';
+        const filename = 'Solution';
           // const filename = `build/${'test.'}${fileEnding}`;
         const javaFile = path.join(directory, `${filename}.java`);
         const javaClassFile = path.join(directory, `${filename}.class`);

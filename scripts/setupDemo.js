@@ -116,6 +116,12 @@ const videobase = [
     live: false,
     code: [],
   }),
+  new Lecture({
+    name: 'reversestring',
+    start: new Date('Jan 29, 2017 10:30:00'),
+    live: false,
+    code: [],
+  }),
 ];
 
 function saveAll(objects, done) {

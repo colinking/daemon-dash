@@ -75,9 +75,9 @@ app.post('/api/start', () => {
 app.post('/api/save', () => {
   console.log(dataStream);
   console.log('writing data stream!');
-  fs.writeFile('dist/public/archives/code/codeSample.json', JSON.stringify(dataStream, null, 4), (err) => {
+  fs.writeFile(`dist/public/archives/code/codeSample${new Date().getTime()}.json`, JSON.stringify(dataStream, null, 4), (err) => {
     if (err) console.error(err);
-    else console.log('it is written (codeSample.json)');
+    else console.log('it is written (codeSample<XXXXXXXX>.json)');
   });
 });
 app.post('/api/login', (req, res, next) => {
