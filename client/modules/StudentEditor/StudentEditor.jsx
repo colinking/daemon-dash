@@ -8,8 +8,8 @@ import styles from './StudentEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
 import EditorOptions from '../EditorOptions/EditorOptions';
 
-const LIVE = "This code is from live.";
-const BRANCH = "This code is locally modified.";
+const LIVE = 'This code is from live.';
+const BRANCH = 'This code is locally modified.';
 
 export default class StudentEditor extends React.Component {
 
@@ -29,8 +29,7 @@ export default class StudentEditor extends React.Component {
     this.goToLive = this.goToLive.bind(this);
     this.updateText = (c) => {
       this.updatingText = true;
-      if (this.editor)
-        this.editor.setText(c.text);
+      if (this.editor) { this.editor.setText(c.text); }
       this.updatingText = false;
     };
     this.getCode = this.getCode.bind(this);
@@ -53,13 +52,13 @@ export default class StudentEditor extends React.Component {
   studentEditedCode() {
     if (!this.updatingText) {
       this.socket.off('PROFESSOR_CODE_EDITED', this.updateText);
-      this.setState({status: BRANCH});
+      this.setState({ status: BRANCH });
     }
   }
 
   goToLive() {
     this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
-    this.setState({status: LIVE});
+    this.setState({ status: LIVE });
   }
 
   render() {

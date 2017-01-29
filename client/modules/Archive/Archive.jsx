@@ -8,16 +8,15 @@ export default class Archive extends React.Component {
     super(props);
 
     this.state = {
-      lectures: []
-    }
+      lectures: [],
+    };
   }
 
   render() {
-    let className = "CMSC 216";
-
+    const className = 'CMSC 216';
 
     $.get('/api/lectures')
-      .then((d) => { this.setState({lectures: d}); });
+      .then((d) => { this.setState({ lectures: d }); });
 
     return (
       <div>
@@ -25,7 +24,6 @@ export default class Archive extends React.Component {
 
 
       </div>
-    )
-
+    );
   }
 }
