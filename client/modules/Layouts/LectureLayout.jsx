@@ -35,7 +35,6 @@ export default class LectureLayout extends React.Component {
               {this.props.videoStream}
             </Grid.Row>
             <Grid.Row>
-              <Image src="http://semantic-ui.com/images/wireframe/media-paragraph.png" />
               {this.props.consoleOutput}
             </Grid.Row>
           </Grid.Column>
