@@ -14,10 +14,12 @@
   height: 8%;
 }
 
-.column1 {
+:global(.ui.column).column1 {
+  padding: 0;
 }
 
 .column2 {
+  padding: 0;
 }
 
 .videoPane {
