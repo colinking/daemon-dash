@@ -25,6 +25,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 const User = require('../server/models/user');
+const Lecture = require('../server/models/lecture');
 
 function clearDatabase(cb) {
   // Clear the user database
@@ -32,7 +33,14 @@ function clearDatabase(cb) {
     if (err) cb(err);
     else {
       console.log('Cleared User database...');
-      cb(null);
+      // Clear lecture database
+      Lecture.remove({}, (err2) => {
+        if (err) cb(err2);
+        else {
+          console.log('Cleared Lecture database...');
+          cb(null);
+        }
+      });
     }
   });
 }
@@ -70,6 +78,40 @@ const userbase = [
   }),
 ];
 
+const videobase = [
+  new Lecture({
+    name: 'example',
+    start: new Date('Jan 28, 2017 09:00:00'),
+    live: false,
+    code: [
+      {
+        timestamp: new Date('Jan 28, 2017 09:00:01'),
+        text: '',
+      },
+      {
+        timestamp: new Date('Jan 28, 2017 09:00:02'),
+        text: 'h',
+      },
+      {
+        timestamp: new Date('Jan 28, 2017 09:00:03'),
+        text: 'he',
+      },
+      {
+        timestamp: new Date('Jan 28, 2017 09:00:05'),
+        text: 'hel',
+      },
+      {
+        timestamp: new Date('Jan 28, 2017 09:00:07'),
+        text: 'hell',
+      },
+      {
+        timestamp: new Date('Jan 28, 2017 09:00:08'),
+        text: 'hello',
+      },
+    ],
+  }),
+];
+
 function saveAll(objects, done) {
   let count = objects.length;
   const handleSave = (err) => {
@@ -95,8 +137,11 @@ clearDatabase((err) => {
   else {
     saveAll(userbase, (err2) => {
       if (err2) throw err2;
-      console.log('Demo setup complete.');
-      mongoose.connection.close();
+      saveAll(videobase, (err3) => {
+        if (err3) throw err3;
+        console.log('Demo setup complete.');
+        mongoose.connection.close();
+      });
     });
   }
 });

@@ -3,29 +3,41 @@ import React from 'react';
 import { Header } from 'semantic-ui-react';
 import $ from 'jquery';
 
+import ClassCard from './ClassCard';
+
 export default class Archive extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      lectures: []
-    }
+      lectures: [],
+    };
+  }
+
+  componentWillMount() {
+    $.get('/api/lectures')
+      .then((d) => { this.setState({ lectures: d.lectures }); });
   }
 
   render() {
-    let className = "CMSC 216";
+    const className = 'CMSC 216';
 
-
-    $.get('/api/lectures')
-      .then((d) => { this.setState({lectures: d}); });
+    let cards = [];
+    if (this.state.lectures) {
+      cards = this.state.lectures.map(lecture =>
+        <ClassCard
+          key={lecture.name}
+          start={new Date(lecture.start)}
+          name={lecture.name}
+          live={lecture.live}
+        />);
+    }
 
     return (
       <div>
-        <Header as="h3" textAlign="center">{className}</Header>
-
-
+        <Header as="h2" textAlign="center">{className}</Header>
+        { cards }
       </div>
-    )
-
+    );
   }
 }
