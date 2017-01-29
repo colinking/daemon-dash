@@ -110,6 +110,12 @@ const videobase = [
       },
     ],
   }),
+  new Lecture({
+    name: 'helloworld',
+    start: new Date('Jan 29, 2017 08:30:00'),
+    live: false,
+    code: [],
+  }),
 ];
 
 function saveAll(objects, done) {

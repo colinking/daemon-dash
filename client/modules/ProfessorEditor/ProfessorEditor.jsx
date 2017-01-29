@@ -35,7 +35,7 @@ export default class ProfessorEditor extends React.Component {
 
   handleChange(a, b) {
     this.setState({ code: b.getValue() });
-    this.socket.emit('PROFESSOR_CODE_EDITED', { text: b.getValue() });
+    this.socket.emit('PROFESSOR_CODE_EDITED', { timestamp: Date.now(), text: b.getValue() });
   }
 
   render() {
@@ -48,4 +48,4 @@ export default class ProfessorEditor extends React.Component {
 }
 
 
-        //<EditorOptions getCode={this.getCode} />
+        // <EditorOptions getCode={this.getCode} />

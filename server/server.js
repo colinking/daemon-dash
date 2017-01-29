@@ -7,6 +7,7 @@ import compression from 'compression';
 import passport from 'passport';
 import session from 'express-session';
 import bodyParser from 'body-parser';
+import fs from 'fs';
 
 import render from './render';
 import websocket from './websocket';
@@ -54,9 +55,30 @@ app.use(passport.session()); // persistent login sessions
 // pass passport for configuration
 require('./config/passport.js')(passport);
 
+const dataStream = [];
+
 // API methods
 app.get('/api/req', api.getReq);
 app.get('/api/lectures', api.getLectures);
+app.post('/api/start', () => {
+  console.log(dataStream);
+  console.log('reseting data stream!');
+  const newText = (dataStream.length > 0 ? dataStream[dataStream.length - 1].text : '//write your code here');
+  dataStream.length = 0;
+  dataStream.push({
+    timestamp: Date.now(),
+    text: newText,
+  });
+  console.log(dataStream);
+});
+app.post('/api/save', () => {
+  console.log(dataStream);
+  console.log('writing data stream!');
+  fs.writeFile('dist/public/archives/code/codeSample.json', JSON.stringify(dataStream, null, 4), (err) => {
+    if (err) console.error(err);
+    else console.log('it is written (codeSample.json)');
+  });
+});
 app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (!user) {
@@ -81,4 +103,4 @@ mongoose.connection.once('open', () => {
   });
 });
 
-io.on('connection', websocket);
+io.on('connection', websocket(dataStream));
