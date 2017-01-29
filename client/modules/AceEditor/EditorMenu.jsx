@@ -56,7 +56,7 @@ export default class EditorMenu extends React.Component {
     ];
 
     const select1 = (
-      <Select
+      <Select compact
         defaultValue="monokai"
         placeholder="Select a theme..."
         options={themes}
@@ -67,7 +67,7 @@ export default class EditorMenu extends React.Component {
     );
 
     const langSelect = (
-      <Select
+      <Select compact
         placeholder="Languages.."
         defaultValue="java"
         onChange={this.props.langOnChange}
@@ -88,12 +88,11 @@ export default class EditorMenu extends React.Component {
       <Grid.Row className={styles.embedMenu}>
         {select1}
         {langSelect}
-        <Label>{this.props.parStatus}</Label>
         <Button
           disabled={this.props.parStatus === LIVE}
           compact onClick={this.props.parOnClick}
         >Go To Live</Button>
-        <Select
+        <Select compact
           placeholder="Past Revisions.."
           defaultValue="live"
           onChange={this.props.parOnChange}
@@ -109,17 +108,15 @@ export default class EditorMenu extends React.Component {
 
     return (
       <Grid columns={2} className={styles.editorMenu}>
-        <Grid.Column className={styles.column1}>
+        <Grid.Column className={styles.embedMenu}>
           {editorSettings}
         </Grid.Column>
-        <Grid.Column className={styles.column2}>
-          <Grid.Row className={styles.embedMenu}>
-            <EditorOptions
-              getCode={this.props.getText}
-              className={styles.codePane}
-              mode={this.props.mode}
-            />
-          </Grid.Row>
+        <Grid.Column className={styles.embedMenu}>
+          <EditorOptions
+            getCode={this.props.getText}
+            className={styles.codePane}
+            mode={this.props.mode}
+          />
         </Grid.Column>
       </Grid>
     );
