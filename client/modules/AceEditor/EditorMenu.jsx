@@ -55,7 +55,7 @@ export default class EditorMenu extends React.Component {
     return (
       <Grid columns={2} className={styles.editorMenu}>
         <Grid.Column className={styles.embedMenu}>
-          <Grid.Row>
+          <Grid.Row className={styles.embedMenu}>
             <Select
               compact
               defaultValue="monokai"
@@ -63,12 +63,16 @@ export default class EditorMenu extends React.Component {
               options={themes}
               onChange={this.props.updateTheme}
               direction='upward'
+              className={styles.codePane}
             />
           </Grid.Row>
         </Grid.Column>
         <Grid.Column className={styles.embedMenu}>
-          <Grid.Row>
-            <EditorOptions getCode={this.props.getText}/>
+          <Grid.Row className={styles.embedMenu}>
+            <EditorOptions 
+              getCode={this.props.getText}
+              className={styles.codePane}
+            />
           </Grid.Row>
         </Grid.Column>
       </Grid>
