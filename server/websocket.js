@@ -91,4 +91,37 @@ module.exports = (socket) => {
   socket.on('mobile attached', () => {
     socket.broadcast.emit('mobile detached');
   });
+
+  let questions = {};
+
+  socket.on('qa fetchall', () => {
+    let vals = [];
+    for (key in questions) {
+      vals.push(questions[key]);
+    }
+    socket.emit('qa fetchall resp', vals);
+  });
+
+  socket.on('qa add', (question) => {
+    let q = {
+      id: Math.random().toString(36).substring(7),
+      body: question,
+      points: 0,
+    };
+    questions[q.id] = q;
+    socket.emit('qa add resp', q);
+    socket.broadcast.emit('qa add resp', q);
+  });
+
+  socket.on('qa upvote', (qid) => {
+    questions[qid].points++;
+    socket.emit('qa upvote resp', qid);
+    socket.broadcast.emit('qa upvote resp', qid);
+  });
+
+  socket.on('qa delete', (qid) => {
+    delete questions[qid];
+    socket.emit('qa delete resp', qid);
+    socket.broadcast.emit('qa delete resp', qid);
+  });
 };
