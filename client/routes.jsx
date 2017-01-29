@@ -8,10 +8,13 @@ import StudentWrapper from './modules/Layouts/StudentWrapper';
 import TeacherWrapper from './modules/Layouts/TeacherWrapper';
 import RecordingPage from './modules/Stream/RecordingPage';
 
+import Archive from './modules/Archive/Archive';
+
 export default (
   <Route path="/" component={Layout}>
     <IndexRedirect to="/login" />
     <Route path="login" component={LoginPage} />
+    <Route path="archive" component={Archive} />
     <Route path="stream">
       <Route path="student" component={StudentWrapper} />
       <Route path="teacher" component={TeacherWrapper} />
