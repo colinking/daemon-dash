@@ -1,34 +1,17 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
-import { Image, Grid, Menu, Button } from 'semantic-ui-react';
+import { Image, Grid, Button } from 'semantic-ui-react';
 
 import styles from './LectureLayout.scss';
+import MenuLayout from './MenuLayout';
 
 export default class LectureLayout extends React.Component {
-
-  static logout() {
-    $.post('/api/logout', (resp) => {
-      if (!resp.error) {
-        browserHistory.push('/');
-      } else {
-        console.error(resp.error);
-      }
-    });
-  }
 
   render() {
     return (
       <div className={styles.lectureLayout}>
-        <Menu size="large" className={styles.menuHeader}>
-          <Menu.Item name="Shipit" />
-
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Button primary onClick={LectureLayout.logout}>Logout</Button>
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu>
+        <MenuLayout></MenuLayout>
         <Grid columns={2} divided className={styles.grid}>
           <Grid.Column className={styles.column1}>
             <Grid.Row className={styles.videoPane}>
