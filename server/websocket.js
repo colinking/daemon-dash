@@ -26,6 +26,7 @@ module.exports = dataStream => (socket) => {
     mkdirp(directory, (mkdirErr) => {
       if (mkdirErr) {
         socket.emit('CODE_EXECUTED', {
+          code: 1,
           err: {
             desc: 'Unable to create server build directory.',
             error: mkdirErr,
@@ -41,6 +42,7 @@ module.exports = dataStream => (socket) => {
         fs.writeFile(javaFile, code, (writeFileErr) => {
           if (writeFileErr) {
             socket.emit('CODE_EXECUTED', {
+              code: 1,
               err: {
                 desc: 'Unable to write code to build directory file.',
                 error: writeFileErr,
@@ -48,15 +50,15 @@ module.exports = dataStream => (socket) => {
             });
           } else {
             filesToDelete.push(javaFile);
-              // TODO: Switch based on language
               // Compile the user code (javac javaFile)
             shell.exec(`javac ${javaFile}`, (compileExitCode, compileStdout, compileStderr) => {
               if (compileExitCode !== 0) {
+                console.log(compileExitCode);
                 shell.rm(filesToDelete);
                 socket.emit('CODE_EXECUTED', {
+                  code: compileExitCode,
                   err: {
                     desc: 'Compilation failed.',
-                    code: compileExitCode,
                     error: compileStderr,
                   },
                 });
@@ -67,9 +69,9 @@ module.exports = dataStream => (socket) => {
                   if (runExitCode !== 0) {
                     shell.rm(filesToDelete);
                     socket.emit('CODE_EXECUTED', {
+                      code: runExitCode,
                       err: {
-                        desc: 'Compilation failed.',
-                        code: runExitCode,
+                        desc: 'Execution failed.',
                         error: runStderr,
                       },
                     });
@@ -90,6 +92,7 @@ module.exports = dataStream => (socket) => {
         fs.writeFile(cFile, code, (writeFileErr) => {
           if (writeFileErr) {
             socket.emit('CODE_EXECUTED', {
+              code: 1,
               err: {
                 desc: 'Unable to write code to build directory file.',
                 error: writeFileErr,
@@ -102,6 +105,7 @@ module.exports = dataStream => (socket) => {
               if (compileExitCode !== 0) {
                 shell.rm(filesToDelete);
                 socket.emit('CODE_EXECUTED', {
+                  code: compileExitCode,
                   err: {
                     desc: 'Compilation failed.',
                     code: compileExitCode,
@@ -115,9 +119,9 @@ module.exports = dataStream => (socket) => {
                   if (runExitCode !== 0) {
                     shell.rm(filesToDelete);
                     socket.emit('CODE_EXECUTED', {
+                      code: runExitCode,
                       err: {
-                        desc: 'Compilation failed.',
-                        code: runExitCode,
+                        desc: 'Execution failed.',
                         error: runStderr,
                       },
                     });
