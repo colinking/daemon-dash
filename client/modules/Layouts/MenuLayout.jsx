@@ -45,8 +45,6 @@ export default class MenuLayout extends React.Component {
         <Menu.Menu position="right">
           <Menu.Item>
             <Button primary onClick={MenuLayout.logout}>Logout</Button>
-            <Button primary onClick={this.startRecordSession}>Start Record Session</Button>
-            <Button primary onClick={this.endRecordSession}>End Record Session</Button>
           </Menu.Item>
         </Menu.Menu>
       </Menu>
