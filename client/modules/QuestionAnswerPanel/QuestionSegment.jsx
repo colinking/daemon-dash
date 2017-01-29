@@ -4,7 +4,7 @@ import { Button, Card } from 'semantic-ui-react';
 export default class QuestionSegment extends React.Component {
   render() {
     return (
-      <Card centered>
+      <Card centered fluid>
         <Card.Content>
           <Card.Meta>
             {this.props.question.points}
