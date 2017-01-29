@@ -61,12 +61,14 @@ export default class AceEditor extends React.Component {
         parOptions={this.props.parOptions}
         parOnChange={this.props.parOnChange.bind(this)}
         isStudent={this.props.isStudent}
+        mode={this.props.mode}
       />
     ) : (
       <EditorMenu
         getText={this.getText.bind(this)}
         updateTheme={this.updateTheme.bind(this)}
         langOnChange={this.props.langOnChange.bind(this)}
+        mode={this.props.mode}
       />
     );
 

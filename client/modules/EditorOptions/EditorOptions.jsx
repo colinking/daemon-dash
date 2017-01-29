@@ -23,6 +23,7 @@ export default class EditorOptions extends React.Component {
   executeCode() {
     socket.emit('EXECUTE_CODE', {
       code: this.props.getCode(),
+      language: this.props.mode,
     });
   }
 
@@ -31,8 +32,10 @@ export default class EditorOptions extends React.Component {
   render() {
     return (
       <div className={styles.editorOptions}>
-        <Button fluid color="green" onClick={this.executeCode}
-          className={styles.execute}>
+        <Button
+          fluid color="green" onClick={this.executeCode}
+          className={styles.execute}
+        >
           <Icon name="terminal" /> Execute
         </Button>
       </div>

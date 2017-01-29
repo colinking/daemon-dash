@@ -132,6 +132,12 @@ module.exports = dataStream => (socket) => {
             });
           }
         });
+      } else {
+        socket.emit('CODE_EXECUTED', {
+          err: {
+            desc: 'Invalid compilation language.',
+          },
+        });
       }
     });
   });
