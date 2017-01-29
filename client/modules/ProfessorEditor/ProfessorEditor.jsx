@@ -38,14 +38,29 @@ export default class ProfessorEditor extends React.Component {
     this.socket.emit('PROFESSOR_CODE_EDITED', { timestamp: Date.now(), text: b.getValue() });
   }
 
+  langOnChange(event) {
+    console.log('changed lang!');
+    const newLang = event.target.innerText.toLowerCase();
+    console.log(newLang);
+    // this.editor.getSession().setMode();
+    // Update editor with new language
+    // Store language as state somewhere?
+    this.setState({ mode: newLang });
+  }
+
   render() {
+    console.log(`eoiunfw ${this.state.mode}`);
     return (
       <div className={styles.app}>
-        <AceEditor onChange={this.handleChange} />
+        <AceEditor onChange={this.handleChange} langOnChange={this.langOnChange.bind(this)} mode={this.state.mode} />
       </div>
     );
   }
 }
+
+ProfessorEditor.defaultProps = {
+  mode: 'java',
+};
 
 
         // <EditorOptions getCode={this.getCode} />

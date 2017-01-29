@@ -17,7 +17,8 @@ export default class AceEditor extends React.Component {
     const node = ReactDOM.findDOMNode(this.refs.root);
     this.editor = ace.edit(node);
     this.editor.setTheme('ace/theme/monokai');
-    this.editor.getSession().setMode(`ace/mode/${this.props.mode || 'java'}`);
+    console.log(`Setting editor mode: ${this.props.mode}`);
+    this.editor.getSession().setMode(`ace/mode/${this.props.mode}`);
     this.editor.setShowPrintMargin(false);
     this.editor.setOptions({ minLines: 25 });
     this.editor.setOptions({ maxLines: 50 });
@@ -39,9 +40,21 @@ export default class AceEditor extends React.Component {
     this.editor.setTheme(`ace/theme/${c.value}`);
   }
 
+  componentDidUpdate() {
+    console.log(`Setting editor mode: ${this.props.mode}`);
+    // Shh..
+    const lookup = {
+      java: 'java',
+      c: 'c_cpp',
+    };
+    this.editor.getSession().setMode(`ace/mode/${lookup[this.props.mode]}`);
+    console.log(this.editor.getSession().getMode());
+  }
+
   render() {
     const nipples = (this.props.isStudent) ? (
-      <EditorMenu getText={this.getText.bind(this)} 
+      <EditorMenu
+        getText={this.getText.bind(this)}
         updateTheme={this.updateTheme.bind(this)}
         parStatus={this.props.parStatus}
         parOnClick={this.props.parOnClick.bind(this)}
@@ -50,15 +63,17 @@ export default class AceEditor extends React.Component {
         isStudent={this.props.isStudent}
       />
     ) : (
-       <EditorMenu getText={this.getText.bind(this)} 
+      <EditorMenu
+        getText={this.getText.bind(this)}
         updateTheme={this.updateTheme.bind(this)}
+        langOnChange={this.props.langOnChange.bind(this)}
       />
     );
 
     return (
       <div className={styles.codePane}>
         {nipples}
-        <div ref='root' className={styles.editorPane}>
+        <div ref="root" className={styles.editorPane}>
           {this.props.code}
         </div>
       </div>
@@ -71,6 +86,7 @@ AceEditor.propTypes = {
   code: React.PropTypes.string,
   content: React.PropTypes.string,
   onChange: React.PropTypes.func,
+  langOnChange: React.PropTypes.func,
   readOnly: React.PropTypes.bool,
 };
 

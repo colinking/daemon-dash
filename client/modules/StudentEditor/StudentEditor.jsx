@@ -18,7 +18,7 @@ export default class StudentEditor extends React.Component {
     this.state = {
       code: '//stufffff',
       status: LIVE,
-      options: [ { text:"Live", value: "live" } ],
+      options: [{ text: 'Live', value: 'live' }],
     };
 
     // This is a flag to check if change is being triggered by socket event or
@@ -63,17 +63,17 @@ export default class StudentEditor extends React.Component {
   }
 
   goToLive() {
-    let x = Date.now();
+    const x = Date.now();
     this.revisions[x] = this.getCode();
-    this.state.options.push({text:x, value:x});
-    this.setState({options: this.state.options });
+    this.state.options.push({ text: x, value: x });
+    this.setState({ options: this.state.options });
     this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
-    this.socket.emit("REQUEST_LATEST_CHANGE");
+    this.socket.emit('REQUEST_LATEST_CHANGE');
   }
 
   reloadPastRevision(v, d) {
-    if (d.value === "live") {
-      this.socket.emit("REQUEST_LATEST_CHANGE");
+    if (d.value === 'live') {
+      this.socket.emit('REQUEST_LATEST_CHANGE');
       this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
       this.setState({ status: LIVE });
     } else {
@@ -89,7 +89,7 @@ export default class StudentEditor extends React.Component {
         <AceEditor
           code={this.state.code}
           onChange={this.studentEditedCode}
-          
+
           parStatus={this.state.status}
           parOnClick={this.goToLive.bind(this)}
           parOptions={this.state.options}

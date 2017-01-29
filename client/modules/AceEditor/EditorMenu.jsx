@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Select, Grid, Label, Button} from 'semantic-ui-react';
+import { Select, Grid, Label, Button } from 'semantic-ui-react';
 
 import styles from './AceEditor.scss';
 
@@ -54,7 +54,7 @@ export default class EditorMenu extends React.Component {
       { value: 'twilight', text: 'Twilight' },
       { value: 'vibrant_ink', text: 'Vibrant Ink' },
     ];
-    
+
     const select1 = (
       <Select
         compact
@@ -62,7 +62,7 @@ export default class EditorMenu extends React.Component {
         placeholder="Select a theme..."
         options={themes}
         onChange={this.props.updateTheme}
-        direction='upward'
+        direction="upward"
         className={styles.codePane}
       />
     );
@@ -71,7 +71,8 @@ export default class EditorMenu extends React.Component {
       <Grid.Row className={styles.embedMenu}>
         {select1}
         <Label>{this.props.parStatus}</Label>
-        <Button disabled={this.props.parStatus === LIVE} 
+        <Button
+          disabled={this.props.parStatus === LIVE}
           compact onClick={this.props.parOnClick}
         >Go To Live</Button>
         <Select
@@ -84,6 +85,21 @@ export default class EditorMenu extends React.Component {
     ) : (
       <Grid.Row className={styles.embedMenu}>
         {select1}
+        <Select
+          placeholder="Languages.."
+          defaultValue="java"
+          onChange={this.props.langOnChange}
+          options={[
+            {
+              text: 'Java',
+              value: 'java',
+            },
+            {
+              text: 'C',
+              value: 'c_cpp',
+            },
+          ]}
+        />
       </Grid.Row>
     );
 
@@ -94,7 +110,7 @@ export default class EditorMenu extends React.Component {
         </Grid.Column>
         <Grid.Column className={styles.column2}>
           <Grid.Row className={styles.embedMenu}>
-            <EditorOptions 
+            <EditorOptions
               getCode={this.props.getText}
               className={styles.codePane}
             />
