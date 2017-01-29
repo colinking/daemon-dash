@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import io from 'socket.io-client';
 
+import styles from './RecordingPage.scss';
+
 export default class RecordingPage extends React.Component {
 
   componentDidMount() {
@@ -44,8 +46,11 @@ export default class RecordingPage extends React.Component {
   }
 
   render() {
+    let style = {height: "100%", bottom: "0"};
+
     return (
-      <video height="300" id="localVideo"></video>
+      <video style={style} height="100" id="localVideo">
+      </video>
     );
   }
 }
