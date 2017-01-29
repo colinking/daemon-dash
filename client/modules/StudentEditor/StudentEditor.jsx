@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Label, Segment, Select } from 'semantic-ui-react';
+import { Button, Label } from 'semantic-ui-react';
 import $ from 'jquery';
 import { browserHistory } from 'react-router';
 import IO from 'socket.io-client';
@@ -72,7 +72,10 @@ export default class StudentEditor extends React.Component {
         />
         <div>
           <Label>{this.state.status}</Label>
-          <Button disabled={this.state.status === LIVE} compact onClick={this.goToLive}>Go To Live</Button>
+          <Button
+            disabled={this.state.status === LIVE}
+            compact onClick={this.goToLive}
+          >Go To Live</Button>
         </div>
       </div>
     );
