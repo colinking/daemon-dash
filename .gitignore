@@ -1,5 +1,6 @@
 # Build directories
 dist
+build
 
 # Environment variable configuration
 .env
@@ -51,4 +52,3 @@ jspm_packages
 
 # Yarn Integrity file
 .yarn-integrity
-

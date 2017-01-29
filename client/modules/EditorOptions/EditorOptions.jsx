@@ -12,6 +12,13 @@ export default class EditorOptions extends React.Component {
     super(props);
     this.socket = IO();
     this.executeCode = this.executeCode.bind(this);
+    this.socket.on('CODE_EXECUTED', (resp) => {
+      if (resp.err) {
+        console.error(resp.err);
+      } else {
+        console.log(resp.output);
+      }
+    });
   }
 
   executeCode() {

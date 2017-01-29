@@ -28,6 +28,7 @@
     "express": "^4.14.0",
     "express-session": "^1.15.0",
     "jquery": "^3.1.1",
+    "mkdirp": "^0.5.1",
     "mongoose": "^4.7.6",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -38,6 +39,7 @@
     "recordrtc": "^5.4.0",
     "semantic-ui-css": "^2.2.4",
     "semantic-ui-react": "^0.63.5",
+    "shelljs": "^0.7.6",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2"
   },
