@@ -27,16 +27,22 @@ export default class ArchiveWrapper extends React.Component {
         browserHistory.push('/');
       }
     });
-  }
-
-  componentDidMount() {
     const url = `/public/archives/code/${this.getCurrentLectureName()}.json`;
     console.log(`Downloading: ${url}`);
-    $.get(url, (resp) => {
-      console.log('downloaded code');
-      console.log(resp);
-      console.log(url);
-      this.setState({ codeStream: resp });
+    $.ajax({
+      dataType: 'json',
+      url,
+      success: (resp) => {
+        console.log('downloaded code');
+        console.log(resp);
+        this.startTime = resp.length > 0 ? new Date(resp[0].timestamp) : null;
+        this.setState({ codeStream: resp });
+      },
+      error: (a1, a2, a3) => {
+        console.log(a1);
+        console.log(a2);
+        console.log(a3);
+      },
     });
   }
 
@@ -45,14 +51,23 @@ export default class ArchiveWrapper extends React.Component {
     // console.log('time update!');
     // console.log(event.timeStamp);
     // Update code based on timestamp
-    this.subeditor.editor.setText(this.getBestText(event.timeStamp));
+    this.subeditor.editor.setText(this.getBestText(event.target.currentTime * 1000));
   }
 
   getBestText(timestamp) {
     // console.log(this.state);
     // console.log(this.state.codeStream);
     if (!this.state.codeStream) return '';
-    return this.state.codeStream[4];
+    console.log(timestamp);
+    let index = 0;
+    const startTime = new Date(this.state.codeStream[0].timestamp);
+    while (index + 1 < this.state.codeStream.length &&
+      (new Date(this.state.codeStream[index + 1].timestamp).getTime() - startTime.getTime()) < timestamp) {
+      index += 1;
+    }
+    console.log(index);
+    console.log(this.state.codeStream[index].text);
+    return this.state.codeStream[index].text;
   }
 
   getCurrentLectureName() {

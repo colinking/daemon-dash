@@ -17,6 +17,7 @@ export default class ArchiveStream extends React.Component {
         height="300"
         id="remoteVideos"
         autoPlay
+        controls
         onTimeUpdate={this.props.onTimeUpdate}
       />);
   }
