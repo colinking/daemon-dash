@@ -24,7 +24,7 @@ export default class TeacherWrapper extends React.Component {
       <LectureLayout
         videoStream={<TeacherStream />}
         codePad={<ProfessorEditor />}
-        consoleOutput={<Console />}
+        consoleOutput={<Console isStudent={false} />}
       />
     );
   }
