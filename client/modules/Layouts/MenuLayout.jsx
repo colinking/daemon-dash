@@ -21,7 +21,7 @@ export default class MenuLayout extends React.Component {
     return (
       <Menu size="large" className={styles.menuHeader}>
         <Menu.Item href="/" name="Shipit" active={this.props.activeTab === 'home'} />
-        <Menu.Item href="/archive" active={this.props.activeTab === 'archive'} name="Archives" />
+        <Menu.Item href="/archives" active={this.props.activeTab === 'archive'} name="Archives" />
 
         <Menu.Menu position="right">
           <Menu.Item>
