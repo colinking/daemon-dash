@@ -4,8 +4,6 @@ const LocalStrategy = require('passport-local').Strategy;
 // load user model
 const User = require('../models/user');
 
-console.log('herewerwe');
-
 module.exports = (passport) => {
   // =========================================================================
   // passport session setup ==================================================

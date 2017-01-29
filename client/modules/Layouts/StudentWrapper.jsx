@@ -11,7 +11,6 @@ export default class StudentWrapper extends React.Component {
 
   componentWillMount() {
     $.get('/api/req', (resp) => {
-      console.log(resp);
       if (!resp.isAuthenticated && resp.type !== 'student') {
         browserHistory.push('/');
       }

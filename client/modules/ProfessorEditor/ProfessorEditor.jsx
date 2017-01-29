@@ -44,7 +44,6 @@ export default class ProfessorEditor extends React.Component {
         <EditorOptions getCode={this.getCode} />
         <AceEditor
           onChange={this.handleChange}
-          readOnly={false}
         />
       </div>
     );

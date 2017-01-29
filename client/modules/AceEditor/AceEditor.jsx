@@ -1,7 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Select } from 'semantic-ui-react';
+
 export default class AceEditor extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.updateTheme = this.updateTheme.bind(this);
+  }
+
   componentDidMount() {
     const node = ReactDOM.findDOMNode(this.refs.root);
     this.editor = ace.edit(node);
@@ -17,15 +26,71 @@ export default class AceEditor extends React.Component {
     this.editor.on('change', (a, b) => { if (this.props.onChange) this.props.onChange(a, b); });
   }
 
+  getText() {
+    return this.editor.getValue();
+  }
+
   setText(text) {
-    this.editor.setValue(text);
+    this.editor.setValue(text, 1);
+  }
+
+  updateTheme(v, c) {
+    this.editor.setTheme('ace/theme/' + c.value);
   }
 
   render() {
     const style = { fontSize: '14px !important', border: '1px solid lightgray' };
+
+    let themes = [
+      { value:"chrome", text: "Chrome" },
+      { value:"clouds", text: "Clouds" },
+      { value:"crimson_editor", text: "Crimson Editor" },
+      { value:"dawn", text: "Dawn" },
+      { value:"dreamweaver", text: "Dreamweaver" },
+      { value:"eclipse", text: "Eclipse" },
+      { value:"github", text: "GitHub" },
+      { value:"iplastic", text: "IPlastic" },
+      { value:"solarized_light", text: "Solarized Light" },
+      { value:"textmate", text: "TextMate" },
+      { value:"tomorrow", text: "Tomorrow" },
+      { value:"xcode", text: "XCode" },
+      { value:"kuroir", text: "Kuroir" },
+      { value:"katzenmilch", text: "KatzenMilch" },
+      { value:"sqlserver", text: "SQL Server" },
+      { value:"ambiance", text: "Ambiance" },
+      { value:"chaos", text: "Chaos" },
+      { value:"clouds_midnight", text: "Clouds Midnight" },
+      { value:"cobalt", text: "Cobalt" },
+      { value:"gruvbox", text: "Gruvbox" },
+      { value:"idle_fingers", text: "idle Fingers" },
+      { value:"kr_theme", text: "krTheme" },
+      { value:"merbivore", text: "Merbivore" },
+      { value:"merbivore_soft", text: "Merbivore Soft" },
+      { value:"mono_industrial", text: "Mono Industrial" },
+      { value:"monokai", text: "Monokai" },
+      { value:"pastel_on_dark", text: "Pastel on dark" },
+      { value:"solarized_dark", text: "Solarized Dark" },
+      { value:"terminal", text: "Terminal" },
+      { value:"tomorrow_night", text: "Tomorrow Night" },
+      { value:"tomorrow_night_blue", text: "Tomorrow Night Blue" },
+      { value:"tomorrow_night_bright", text: "Tomorrow Night Bright" },
+      { value:"tomorrow_night_eighties", text: "Tomorrow Night 80s" },
+      { value:"twilight", text: "Twilight" },
+      { value:"vibrant_ink", text: "Vibrant Ink" }
+    ];
+
     return (
-      <div ref="root" style={style}>
-        {this.props.code}
+      <div>
+        <div ref="root" style={style}>
+          {this.props.code}
+        </div>
+        <Select
+          compact
+          defaultValue="monokai"
+          placeholder="Select a theme..."
+          options={themes}
+          onChange={this.updateTheme}
+        />
       </div>
     );
   }
@@ -41,6 +106,6 @@ AceEditor.propTypes = {
 
 AceEditor.defaultProps = {
   mode: 'java',
-  code: '//write your code here',
-  readOnly: true,
+  code: '\/\/write your code here',
+  readOnly: false
 };
