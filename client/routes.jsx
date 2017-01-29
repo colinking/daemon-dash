@@ -6,6 +6,7 @@ import LoginPage from './modules/LoginPage/LoginPage';
 import Layout from './modules/Layout';
 import StudentWrapper from './modules/Layouts/StudentWrapper';
 import TeacherWrapper from './modules/Layouts/TeacherWrapper';
+import RecordingPage from './modules/Stream/RecordingPage';
 
 export default (
   <Route path="/" component={Layout}>
@@ -14,6 +15,7 @@ export default (
     <Route path="stream">
       <Route path="student" component={StudentWrapper} />
       <Route path="teacher" component={TeacherWrapper} />
+      <Route path="recording" component={RecordingPage} />
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Route>
