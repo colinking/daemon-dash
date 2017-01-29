@@ -4,6 +4,7 @@ import { Header } from 'semantic-ui-react';
 import $ from 'jquery';
 
 import ClassCard from './ClassCard';
+import MenuLayout from '../Layouts/MenuLayout';
 
 export default class Archive extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ export default class Archive extends React.Component {
 
     return (
       <div>
+        <MenuLayout activeTab="archive" />
         <Header as="h2" textAlign="center">{className}</Header>
         { cards }
       </div>

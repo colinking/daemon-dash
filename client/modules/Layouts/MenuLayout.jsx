@@ -20,7 +20,8 @@ export default class MenuLayout extends React.Component {
   render() {
     return (
       <Menu size="large" className={styles.menuHeader}>
-        <Menu.Item name="Shipit" />
+        <Menu.Item href="/" name="Shipit" active={this.props.activeTab === 'home'} />
+        <Menu.Item href="/archive" active={this.props.activeTab === 'archive'} name="Archives" />
 
         <Menu.Menu position="right">
           <Menu.Item>
@@ -31,3 +32,7 @@ export default class MenuLayout extends React.Component {
     );
   }
 }
+
+MenuLayout.propTypes = {
+  activeTab: React.PropTypes.string,
+};
