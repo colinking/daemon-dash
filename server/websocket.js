@@ -96,9 +96,9 @@ module.exports = (socket) => {
 
   socket.on('qa fetchall', () => {
     let vals = [];
-    for (key in questions) {
+    Object.keys(questions).forEach((key) => {
       vals.push(questions[key]);
-    }
+    });
     socket.emit('qa fetchall resp', vals);
   });
 
