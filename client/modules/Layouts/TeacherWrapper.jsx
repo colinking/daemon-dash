@@ -3,10 +3,10 @@ import React from 'react';
 import LectureLayout from './LectureLayout';
 import TeacherStream from '../Stream/TeacherStream';
 
-import ProfessorView from '../ProfessorView/ProfessorView';
+import ProfessorEditor from '../ProfessorEditor/ProfessorEditor';
 
 export default function TeacherWrapper() {
   return (
-    <LectureLayout videoStream={<TeacherStream />} codePad={<ProfessorView />}/>
+    <LectureLayout videoStream={<TeacherStream />} codePad={<ProfessorEditor />}/>
   );
 }

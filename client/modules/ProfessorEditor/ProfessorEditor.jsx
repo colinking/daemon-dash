@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-import styles from './ProfessorView.scss';
+import styles from './ProfessorEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
-import io from 'socket.io-client';
+import IO from 'socket.io-client';
 
-export default class ProfessorView extends React.Component {
+export default class ProfessorEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    this.socket = io('/');
+    this.socket = IO();
     this.state = {
       code: "\/\/stuff"
     }
@@ -24,7 +24,10 @@ export default class ProfessorView extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <AceEditor onChange={this.handleChange}/>
+        <AceEditor
+          onChange={this.handleChange}
+          readOnly={false}
+        />
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-import styles from './StudentView.scss';
+import styles from './StudentEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
 import IO from 'socket.io-client';
 
-export default class StudentView extends React.Component {
+export default class StudentEditor extends React.Component {
 
   constructor(props) {
     super(props);
