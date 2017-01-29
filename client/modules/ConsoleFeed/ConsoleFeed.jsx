@@ -20,7 +20,7 @@ export default class ConsoleFeed extends React.Component {
   componentDidMount() {
     const node = ReactDOM.findDOMNode(this.refs.root);
     this.editor = ace.edit(node);
-    this.editor.setTheme('ace/theme/monokai');
+    this.editor.setTheme('ace/theme/vibrant_ink');
     this.editor.setShowPrintMargin(false);
     this.editor.setOptions({ minLines: 10 });
     this.editor.setOptions({ maxLines: 20 });
