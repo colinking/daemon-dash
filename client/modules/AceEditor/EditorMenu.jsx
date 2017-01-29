@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Select, Grid } from 'semantic-ui-react';
+import { Select, Grid, Label, Button} from 'semantic-ui-react';
 
 import styles from './AceEditor.scss';
 
 import EditorOptions from '../EditorOptions/EditorOptions';
+
+const LIVE = 'This code is from live.';
+const BRANCH = 'This code is locally modified.';
 
 export default class EditorMenu extends React.Component {
 
@@ -51,23 +54,45 @@ export default class EditorMenu extends React.Component {
       { value: 'twilight', text: 'Twilight' },
       { value: 'vibrant_ink', text: 'Vibrant Ink' },
     ];
+    
+    const select1 = (
+      <Select
+        compact
+        defaultValue="monokai"
+        placeholder="Select a theme..."
+        options={themes}
+        onChange={this.props.updateTheme}
+        direction='upward'
+        className={styles.codePane}
+      />
+    );
+
+    const editorSettings = (this.props.isStudent) === 'yes' ? (
+      <Grid.Row className={styles.embedMenu}>
+        {select1}
+        <Label>{this.props.parStatus}</Label>
+        <Button disabled={this.props.parStatus === LIVE} 
+          compact onClick={this.props.parOnClick}
+        >Go To Live</Button>
+        <Select
+          placeholder="Past Revisions.."
+          defaultValue="live"
+          onChange={this.props.parOnChange}
+          options={this.props.parOptions}
+        />
+      </Grid.Row>
+    ) : (
+      <Grid.Row className={styles.embedMenu}>
+        {select1}
+      </Grid.Row>
+    );
 
     return (
       <Grid columns={2} className={styles.editorMenu}>
-        <Grid.Column className={styles.embedMenu}>
-          <Grid.Row className={styles.embedMenu}>
-            <Select
-              compact
-              defaultValue="monokai"
-              placeholder="Select a theme..."
-              options={themes}
-              onChange={this.props.updateTheme}
-              direction='upward'
-              className={styles.codePane}
-            />
-          </Grid.Row>
+        <Grid.Column className={styles.column1}>
+          {editorSettings}
         </Grid.Column>
-        <Grid.Column className={styles.embedMenu}>
+        <Grid.Column className={styles.column2}>
           <Grid.Row className={styles.embedMenu}>
             <EditorOptions 
               getCode={this.props.getText}

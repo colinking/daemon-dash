@@ -89,21 +89,15 @@ export default class StudentEditor extends React.Component {
         <AceEditor
           code={this.state.code}
           onChange={this.studentEditedCode}
+          
+          parStatus={this.state.status}
+          parOnClick={this.goToLive.bind(this)}
+          parOptions={this.state.options}
+          parOnChange={this.reloadPastRevision.bind(this)}
+          isStudent={'yes'}
+
           ref={(r) => { this.editor = r; }}
         />
-        <div>
-          <Label>{this.state.status}</Label>
-          <Button
-            disabled={this.state.status === LIVE}
-            compact onClick={this.goToLive}
-          >Go To Live</Button>
-          <Select
-            placeholder="Past Revisions.."
-            defaultValue="live"
-            onChange={this.reloadPastRevision}
-            options={this.state.options}
-          />
-        </div>
       </div>
     );
   }

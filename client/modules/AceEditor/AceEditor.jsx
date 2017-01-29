@@ -31,16 +31,33 @@ export default class AceEditor extends React.Component {
     return this.editor.getValue();
   }
 
+  setText(text) {
+    this.editor.setValue(text, 1);
+  }
+
   updateTheme(v, c) {
     this.editor.setTheme(`ace/theme/${c.value}`);
   }
 
   render() {
+    const nipples = (this.props.isStudent) ? (
+      <EditorMenu getText={this.getText.bind(this)} 
+        updateTheme={this.updateTheme.bind(this)}
+        parStatus={this.props.parStatus}
+        parOnClick={this.props.parOnClick.bind(this)}
+        parOptions={this.props.parOptions}
+        parOnChange={this.props.parOnChange.bind(this)}
+        isStudent={this.props.isStudent}
+      />
+    ) : (
+       <EditorMenu getText={this.getText.bind(this)} 
+        updateTheme={this.updateTheme.bind(this)}
+      />
+    );
 
     return (
       <div className={styles.codePane}>
-        <EditorMenu getText={this.getText.bind(this)} 
-          updateTheme={this.updateTheme.bind(this)} />
+        {nipples}
         <div ref='root' className={styles.editorPane}>
           {this.props.code}
         </div>
