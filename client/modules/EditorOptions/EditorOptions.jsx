@@ -2,7 +2,7 @@ import React from 'react';
 // import { browserHistory } from 'react-router';
 // import $ from 'jquery';
 import { Button, Icon } from 'semantic-ui-react';
-import IO from 'socket.io-client';
+import { socket } from '../globals';
 
 import styles from './EditorOptions.scss';
 
@@ -10,9 +10,8 @@ export default class EditorOptions extends React.Component {
 
   constructor(props) {
     super(props);
-    this.socket = IO();
     this.executeCode = this.executeCode.bind(this);
-    this.socket.on('CODE_EXECUTED', (resp) => {
+    socket.on('CODE_EXECUTED', (resp) => {
       if (resp.err) {
         console.error(resp.err);
       } else {
@@ -22,7 +21,7 @@ export default class EditorOptions extends React.Component {
   }
 
   executeCode() {
-    this.socket.emit('EXECUTE_CODE', {
+    socket.emit('EXECUTE_CODE', {
       code: this.props.getCode(),
     });
   }
@@ -32,7 +31,7 @@ export default class EditorOptions extends React.Component {
   render() {
     return (
       <div className={styles.editorOptions}>
-        <Button fluid color="green" onClick={this.executeCode} 
+        <Button fluid color="green" onClick={this.executeCode}
           className={styles.execute}>
           <Icon name="terminal" /> Execute
         </Button>

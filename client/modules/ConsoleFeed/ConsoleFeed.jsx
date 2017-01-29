@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Segment } from 'semantic-ui-react';
 
-import IO from 'socket.io-client';
+import { socket } from '../globals';
 
 import AceEditor from '../AceEditor/AceEditor';
 
@@ -13,28 +13,6 @@ export default class ConsoleFeed extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      feed: [
-        "test1",
-        "test2",
-        "test3",
-        "test4",
-        "test5",
-        "test6",
-        "test7",
-        "test8",
-        "test9",
-        "test0",
-        "testa",
-        "testb",
-        "testc",
-        "testd",
-        "teste",
-        "testf",
-      ]
-    }
-
-    this.socket = IO();
   }
 
   componentDidMount() {
@@ -46,6 +24,11 @@ export default class ConsoleFeed extends React.Component {
     this.editor.setOptions({ maxLines: 20 });
     this.editor.$blockScrolling = Infinity;
     this.editor.setReadOnly(true);
+
+    socket.on('CODE_EXECUTED', (text) => {
+      this.editor.setValue(this.editor.getValue() + JSON.stringify(text) + "\n", 1);
+    });
+
   }
 
   render() {
