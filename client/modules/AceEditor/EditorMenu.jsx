@@ -57,7 +57,6 @@ export default class EditorMenu extends React.Component {
 
     const select1 = (
       <Select
-        compact
         defaultValue="monokai"
         placeholder="Select a theme..."
         options={themes}

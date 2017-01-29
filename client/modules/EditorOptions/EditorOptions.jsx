@@ -31,7 +31,7 @@ export default class EditorOptions extends React.Component {
   render() {
     return (
       <div className={styles.editorOptions}>
-        <Button fluid color="green" onClick={this.executeCode}
+        <Button color="green" onClick={this.executeCode}
           className={styles.execute}>
           <Icon name="terminal" /> Execute
         </Button>

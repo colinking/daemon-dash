@@ -26,9 +26,8 @@ export default class ConsoleFeed extends React.Component {
     this.editor.setReadOnly(true);
 
     socket.on('CODE_EXECUTED', (text) => {
-      this.editor.setValue(this.editor.getValue() + JSON.stringify(text) + "\n", 1);
+      this.editor.setValue(JSON.stringify(text) + "\n", 1);
     });
-
   }
 
   render() {
