@@ -21,7 +21,7 @@ export default class AceEditor extends React.Component {
     this.editor.getSession().setMode(`ace/mode/${this.props.mode}`);
     this.editor.setShowPrintMargin(false);
     this.editor.setOptions({ minLines: 25 });
-    this.editor.setOptions({ maxLines: 50 });
+    this.editor.setOptions({ maxLines: 44 });
     this.editor.$blockScrolling = Infinity;
     this.editor.setReadOnly(this.props.readOnly);
     this.editor.setValue(this.props.code);
