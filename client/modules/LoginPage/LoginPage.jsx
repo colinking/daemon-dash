@@ -4,8 +4,18 @@ import { Button, Form } from 'semantic-ui-react';
 import $ from 'jquery';
 
 import styles from './LoginPage.scss';
+import isMobile from '../../isMobile';
 
 export default class LoginPage extends React.Component {
+
+  static getRedirectEndpoint(resp) {
+    if (resp.type === 'student') {
+      return '/stream/student';
+    } else if (isMobile()) {
+      return '/stream/recording';
+    }
+    return '/stream/teacher';
+  }
 
   static handleSubmit(event, { formData }) {
     event.preventDefault();
@@ -16,7 +26,7 @@ export default class LoginPage extends React.Component {
       success: ((resp) => {
         console.log(resp);
         if (!resp.error) {
-          browserHistory.push((resp.type === 'student' ? '/stream/student' : '/stream/teacher'));
+          browserHistory.push(LoginPage.getRedirectEndpoint(resp));
         } else {
           console.error(resp.error);
         }
@@ -28,7 +38,7 @@ export default class LoginPage extends React.Component {
     $.get('/api/req', (resp) => {
       console.log(resp);
       if (resp.isAuthenticated) {
-        browserHistory.push((resp.type === 'student' ? '/stream/student' : '/stream/teacher'));
+        browserHistory.push(LoginPage.getRedirectEndpoint(resp));
       }
     });
   }
