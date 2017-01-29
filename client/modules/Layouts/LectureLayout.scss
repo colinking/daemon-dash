@@ -1,3 +1,31 @@
 .codepad {
   height: 100%;
 }
+
+.grid {
+  height: 92%;
+}
+
+.lectureLayout {
+  height: 100%;
+}
+
+.menuHeader {
+  height: 8%;
+}
+
+:global(.ui.column).column1 {
+  padding: 0;
+}
+
+.column2 {
+  padding: 0;
+}
+
+.videoPane {
+  height: 50%;
+}
+
+.outputPane {
+  height: 50%;
+}

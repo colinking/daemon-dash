@@ -6,6 +6,7 @@ import IO from 'socket.io-client';
 
 import styles from './ProfessorEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
+import EditorOptions from '../EditorOptions/EditorOptions';
 
 export default class ProfessorEditor extends React.Component {
 
@@ -16,6 +17,7 @@ export default class ProfessorEditor extends React.Component {
       code: '//stuff',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.getCode = this.getCode.bind(this);
   }
 
   componentWillMount() {
@@ -27,6 +29,10 @@ export default class ProfessorEditor extends React.Component {
     });
   }
 
+  getCode() {
+    return this.state.code;
+  }
+
   handleChange(a, b) {
     this.setState({ code: b.getValue() });
     this.socket.emit('PROFESSOR_CODE_EDITED', { text: b.getValue() });
@@ -34,10 +40,12 @@ export default class ProfessorEditor extends React.Component {
 
   render() {
     return (
-      <AceEditor
-        onChange={this.handleChange}
-        readOnly={false}
-      />
+      <div className={styles.app}>
+        <EditorOptions getCode={this.getCode} />
+        <AceEditor
+          onChange={this.handleChange}
+        />
+      </div>
     );
   }
 }

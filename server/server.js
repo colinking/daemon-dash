@@ -56,6 +56,7 @@ require('./config/passport.js')(passport);
 
 // API methods
 app.get('/api/req', api.getReq);
+app.get('/api/lectures', api.getLectures);
 app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (!user) {

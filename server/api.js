@@ -1,5 +1,5 @@
 const express = require('express');
-// const User = require('../models/user');
+const Lecture = require('./models/lecture');
 
 const router = express.Router();
 
@@ -21,6 +21,16 @@ router.getReq = (req, res) => {
   sendJSON(res, {
     isAuthenticated: req.isAuthenticated(),
     type: (req.isAuthenticated() ? req.user.type : null),
+  });
+};
+
+router.getLectures = (req, res) => {
+  Lecture.find().sort({ date: -1 }).exec((err, lectures) => {
+    if (err) {
+      sendJSON(res, { err });
+    } else {
+      sendJSON(res, { lectures });
+    }
   });
 };
 

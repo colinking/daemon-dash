@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import styles from './RecordingPage.scss';
+
 export default class TeacherStream extends React.Component {
   componentDidMount() {
     const webrtc = new SimpleWebRTC({
@@ -22,6 +24,6 @@ export default class TeacherStream extends React.Component {
   }
 
   render() {
-    return (<video height="300" id="localVideo"></video>);
+    return (<video className={styles.vidObject} height="300" id="localVideo"></video>);
   }
 }

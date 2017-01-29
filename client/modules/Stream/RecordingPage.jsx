@@ -3,6 +3,8 @@ import $ from 'jquery';
 import io from 'socket.io-client';
 import { Button } from 'semantic-ui-react';
 
+import styles from './RecordingPage.scss';
+
 export default class RecordingPage extends React.Component {
 
   constructor() {
@@ -127,9 +129,11 @@ export default class RecordingPage extends React.Component {
   }
 
   render() {
+    let style = {height: "100%", bottom: "0"};
+
     return (
       <div>
-        <video height="700" id="localVideo"></video>
+        <video style={style} height="100" id="localVideo"></video>
         <br />
         <br />
         <Button onClick={this.handleStartRecording}>Start Recording</Button>
