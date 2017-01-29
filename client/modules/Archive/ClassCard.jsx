@@ -12,7 +12,7 @@ export default class ClassCard extends React.Component {
   }
 
   clickHandler() {
-    browserHistory.push(`/archive/${this.props.name}`);
+    browserHistory.push(`/archives/${this.props.name}`);
   }
 
   render() {

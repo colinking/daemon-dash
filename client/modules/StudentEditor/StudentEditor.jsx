@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Label } from 'semantic-ui-react';
+import { Button, Label, Select } from 'semantic-ui-react';
 import $ from 'jquery';
 import { browserHistory } from 'react-router';
 import IO from 'socket.io-client';
@@ -18,13 +18,16 @@ export default class StudentEditor extends React.Component {
     this.state = {
       code: '//stufffff',
       status: LIVE,
+      options: [ { text:"Live", value: "live" } ],
     };
 
     // This is a flag to check if change is being triggered by socket event or
     // user edit
     this.updatingText = false;
+    this.revisions = {};
 
     this.studentEditedCode = this.studentEditedCode.bind(this);
+    this.reloadPastRevision = this.reloadPastRevision.bind(this);
     this.goToLive = this.goToLive.bind(this);
     this.updateText = (c) => {
       this.updatingText = true;
@@ -60,8 +63,24 @@ export default class StudentEditor extends React.Component {
   }
 
   goToLive() {
+    let x = Date.now();
+    this.revisions[x] = this.getCode();
+    this.state.options.push({text:x, value:x});
+    this.setState({options: this.state.options });
     this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
     this.socket.emit("REQUEST_LATEST_CHANGE");
+  }
+
+  reloadPastRevision(v, d) {
+    if (d.value === "live") {
+      this.socket.emit("REQUEST_LATEST_CHANGE");
+      this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
+      this.setState({ status: LIVE });
+    } else {
+      this.socket.off('PROFESSOR_CODE_EDITED', this.updateText);
+      this.updateText({ text: this.revisions[d.value] });
+      this.setState({ status: BRANCH });
+    }
   }
 
   render() {
@@ -78,6 +97,12 @@ export default class StudentEditor extends React.Component {
             disabled={this.state.status === LIVE}
             compact onClick={this.goToLive}
           >Go To Live</Button>
+          <Select
+            placeholder="Past Revisions.."
+            defaultValue="live"
+            onChange={this.reloadPastRevision}
+            options={this.state.options}
+          />
         </div>
       </div>
     );

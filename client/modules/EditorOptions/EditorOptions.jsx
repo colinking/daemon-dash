@@ -32,7 +32,7 @@ export default class EditorOptions extends React.Component {
   render() {
     return (
       <div className={styles.editorOptions}>
-        <Button fluid color="yellow" onClick={this.executeCode}>
+        <Button fluid color="green" onClick={this.executeCode}>
           <Icon name="terminal" /> Execute
         </Button>
       </div>
