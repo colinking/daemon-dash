@@ -67,9 +67,28 @@ export default class EditorMenu extends React.Component {
       />
     );
 
+    const langSelect = (
+      <Select
+        placeholder="Languages.."
+        defaultValue="java"
+        onChange={this.props.langOnChange}
+        options={[
+          {
+            text: 'Java',
+            value: 'java',
+          },
+          {
+            text: 'C',
+            value: 'c_cpp',
+          },
+        ]}
+      />
+    );
+
     const editorSettings = (this.props.isStudent) === 'yes' ? (
       <Grid.Row className={styles.embedMenu}>
         {select1}
+        {langSelect}
         <Label>{this.props.parStatus}</Label>
         <Button
           disabled={this.props.parStatus === LIVE}
@@ -85,21 +104,7 @@ export default class EditorMenu extends React.Component {
     ) : (
       <Grid.Row className={styles.embedMenu}>
         {select1}
-        <Select
-          placeholder="Languages.."
-          defaultValue="java"
-          onChange={this.props.langOnChange}
-          options={[
-            {
-              text: 'Java',
-              value: 'java',
-            },
-            {
-              text: 'C',
-              value: 'c_cpp',
-            },
-          ]}
-        />
+        {langSelect}
       </Grid.Row>
     );
 
