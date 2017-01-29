@@ -5,6 +5,8 @@ import { Menu, Segment } from 'semantic-ui-react';
 import QuestionAnswerPanel from '../QuestionAnswerPanel/QuestionAnswerPanel';
 import ConsoleFeed from '../ConsoleFeed/ConsoleFeed';
 
+import styles from './Console.scss';
+
 export default class Console extends React.Component {
 
   constructor(props) {
@@ -20,13 +22,13 @@ export default class Console extends React.Component {
   render() {
     let { activeItem } = this.state;
     return (
-      <div>
-        <Menu attached='top' tabular>
+      <div className={styles.container}>
+        <Menu attached='top' tabular className={styles.menu}>
           <Menu.Item name='Console' active={activeItem === 'Console'} onClick={this.handleItemClick} />
           <Menu.Item name='QA' active={activeItem === 'QA'} onClick={this.handleItemClick} />
         </Menu>
-        { this.state.activeItem === 'Console' ? <ConsoleFeed /> : null}
-        { this.state.activeItem === 'QA' ? <QuestionAnswerPanel /> : null}
+        { this.state.activeItem === 'Console' ? <ConsoleFeed className={styles.body}/> : null}
+        { this.state.activeItem === 'QA' ? <QuestionAnswerPanel className={styles.body}/> : null}
       </div>
     )
   }
