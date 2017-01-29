@@ -23,6 +23,7 @@ export default class EditorOptions extends React.Component {
   executeCode() {
     socket.emit('EXECUTE_CODE', {
       code: this.props.getCode(),
+      language: this.props.mode,
     });
   }
 

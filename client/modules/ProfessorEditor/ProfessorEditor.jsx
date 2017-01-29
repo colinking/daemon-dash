@@ -49,7 +49,6 @@ export default class ProfessorEditor extends React.Component {
   }
 
   render() {
-    console.log(`eoiunfw ${this.state.mode}`);
     return (
       <div className={styles.app}>
         <AceEditor onChange={this.handleChange} langOnChange={this.langOnChange.bind(this)} mode={this.state.mode} />

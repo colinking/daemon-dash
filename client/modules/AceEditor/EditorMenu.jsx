@@ -112,6 +112,7 @@ export default class EditorMenu extends React.Component {
             <EditorOptions
               getCode={this.props.getText}
               className={styles.codePane}
+              mode={this.props.mode}
             />
           </Grid.Row>
         </Grid.Column>
