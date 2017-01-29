@@ -6,6 +6,7 @@ import IO from 'socket.io-client';
 
 import styles from './StudentView.scss';
 import AceEditor from '../AceEditor/AceEditor';
+import EditorOptions from '../EditorOptions/EditorOptions';
 
 export default class StudentView extends React.Component {
 
@@ -15,11 +16,13 @@ export default class StudentView extends React.Component {
     this.state = {
       code: '//stuff',
     };
+    this.getCode = this.getCode.bind(this);
   }
 
   componentWillMount() {
     this.socket.on('PROFESSOR_CODE_EDITED', (c) => {
       this.editor.setText(c.text);
+      // this.setState({ code: c.text });
     });
     $.get('/api/req', (resp) => {
       console.log(resp);
@@ -29,9 +32,16 @@ export default class StudentView extends React.Component {
     });
   }
 
+  getCode() {
+    // WTF?
+    return this.editor.editor.getValue();
+  }
+
   render() {
+    console.log('render');
     return (
       <div className={styles.app}>
+        <EditorOptions getCode={this.getCode} />
         <AceEditor code={this.state.code} ref={(r) => { this.editor = r; }} />
       </div>
     );
