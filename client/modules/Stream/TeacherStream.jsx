@@ -15,10 +15,11 @@ export default class TeacherStream extends React.Component {
     this.socket.on('mobile attached', () => {
       console.log('received mobile');
       this.leaveRoom();
-    })
-  }
+    });
+    this.socket.on('mobile detached', () => {
+      this.joinRoom();
+    });
 
-  componentDidMount() {
     this.webrtc = new SimpleWebRTC({
       localVideoEl: 'localVideo',
       autoRequestMedia: true
@@ -38,12 +39,11 @@ export default class TeacherStream extends React.Component {
   }
 
   joinRoom() {
-    this.webrtc.joinRoom(this.nonce);
+    this.webrtc.startLocalVideo();
   }
 
   leaveRoom() {
     this.webrtc.stopLocalVideo();
-    this.webrtc.leaveRoom();
   }
 
   render() {
