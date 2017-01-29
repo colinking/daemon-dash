@@ -83,12 +83,11 @@ module.exports = dataStream => (socket) => {
           }
         });
       } else if (language === 'c') {
-        const filename = 'Test';
-          // const filename = `build/${'test.'}${fileEnding}`;
-        const javaFile = path.join(directory, `${filename}.java`);
-        const javaClassFile = path.join(directory, `${filename}.class`);
+        const filename = 'test';
+        const cFile = path.join(directory, `${filename}.c`);
+        const outFile = path.join(directory, 'a.out');
         // Write user's code to tmp file in build directory
-        fs.writeFile(javaFile, code, (writeFileErr) => {
+        fs.writeFile(cFile, code, (writeFileErr) => {
           if (writeFileErr) {
             socket.emit('CODE_EXECUTED', {
               err: {
@@ -97,10 +96,9 @@ module.exports = dataStream => (socket) => {
               },
             });
           } else {
-            filesToDelete.push(javaFile);
-              // TODO: Switch based on language
-              // Compile the user code (javac javaFile)
-            shell.exec(`javac ${javaFile}`, (compileExitCode, compileStdout, compileStderr) => {
+            filesToDelete.push(cFile);
+              // Compile the user code (gcc cFile)
+            shell.exec(`cd ${directory} && gcc ${filename}.c`, (compileExitCode, compileStdout, compileStderr) => {
               if (compileExitCode !== 0) {
                 shell.rm(filesToDelete);
                 socket.emit('CODE_EXECUTED', {
@@ -111,9 +109,9 @@ module.exports = dataStream => (socket) => {
                   },
                 });
               } else {
-                filesToDelete.push(javaClassFile);
+                filesToDelete.push(outFile);
                   // Run the user code (java javacFile)
-                shell.exec(`cd ${directory} && java ${filename}`, (runExitCode, runStdout, runStderr) => {
+                shell.exec(`cd ${directory} && ./a.out`, (runExitCode, runStdout, runStderr) => {
                   if (runExitCode !== 0) {
                     shell.rm(filesToDelete);
                     socket.emit('CODE_EXECUTED', {
