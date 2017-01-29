@@ -63,7 +63,7 @@ export default class StudentEditor extends React.Component {
   }
 
   langOnChange(event) {
-    console.log('changed lang!');
+    console.log('changed lang (student)!');
     const newLang = event.target.innerText.toLowerCase();
     console.log(newLang);
     // this.editor.getSession().setMode();
@@ -94,6 +94,7 @@ export default class StudentEditor extends React.Component {
   }
 
   render() {
+    console.log(`re-rendering student editor ${this.state.mode}`);
     return (
       <div className={styles.app}>
         <AceEditor
@@ -106,7 +107,7 @@ export default class StudentEditor extends React.Component {
           parOnChange={this.reloadPastRevision.bind(this)}
           isStudent={'yes'}
           mode={this.state.mode}
-          langOnChange={this.langOnChange}
+          langOnChange={this.langOnChange.bind(this)}
 
           ref={(r) => { this.editor = r; }}
         />
