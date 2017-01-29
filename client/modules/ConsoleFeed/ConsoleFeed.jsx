@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 
 import { Segment } from 'semantic-ui-react';
 
-import { socket } from '../globals';
+import io from 'socket.io-client';
 
 import AceEditor from '../AceEditor/AceEditor';
 
 import styles from './ConsoleFeed.scss';
+
+import {uniqueGlobalId} from '../../global'
 
 export default class ConsoleFeed extends React.Component {
 
@@ -18,15 +20,15 @@ export default class ConsoleFeed extends React.Component {
   componentDidMount() {
     const node = ReactDOM.findDOMNode(this.refs.root);
     this.editor = ace.edit(node);
-    this.editor.setTheme('ace/theme/monokai');
+    this.editor.setTheme('ace/theme/vibrant_ink');
     this.editor.setShowPrintMargin(false);
     this.editor.setOptions({ minLines: 10 });
     this.editor.setOptions({ maxLines: 20 });
     this.editor.$blockScrolling = Infinity;
     this.editor.setReadOnly(true);
     // this.editor.renderer.setShowGutter(false);
-
-    socket.on('CODE_EXECUTED', (text) => {
+    this.socket = io();
+    this.socket.on('CODE_EXECUTED_' + uniqueGlobalId(), (text) => {
       const time = new Date().toLocaleTimeString();
       const top = `${time} (Exit Code: ${text.code})\n--------------------------`;
       if (text.err) {

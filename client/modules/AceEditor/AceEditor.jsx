@@ -17,7 +17,6 @@ export default class AceEditor extends React.Component {
     const node = ReactDOM.findDOMNode(this.refs.root);
     this.editor = ace.edit(node);
     this.editor.setTheme('ace/theme/monokai');
-    console.log(`Setting editor mode: ${this.props.mode}`);
     this.editor.getSession().setMode(`ace/mode/${this.props.mode}`);
     this.editor.setShowPrintMargin(false);
     this.editor.setOptions({ minLines: 25 });
@@ -41,14 +40,12 @@ export default class AceEditor extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(`Setting editor mode: ${this.props.mode}`);
     // Shh..
     const lookup = {
       java: 'java',
       c: 'c_cpp',
     };
     this.editor.getSession().setMode(`ace/mode/${lookup[this.props.mode]}`);
-    console.log(this.editor.getSession().getMode());
   }
 
   render() {

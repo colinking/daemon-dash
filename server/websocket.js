@@ -16,7 +16,7 @@ module.exports = (questions, dataStream) => (socket) => {
   });
 
     // Code execution endpoints
-  socket.on('EXECUTE_CODE', ({ code, language }) => {
+  socket.on('EXECUTE_CODE', ({ id, code, language }) => {
     console.log('Received code');
     console.log(code);
 
@@ -25,7 +25,7 @@ module.exports = (questions, dataStream) => (socket) => {
       // Create build dir., if necessary
     mkdirp(directory, (mkdirErr) => {
       if (mkdirErr) {
-        socket.emit('CODE_EXECUTED', {
+        socket.broadcast.emit('CODE_EXECUTED_' + id, {
           code: 1,
           err: {
             desc: 'Unable to create server build directory.',
@@ -41,7 +41,7 @@ module.exports = (questions, dataStream) => (socket) => {
         // Write user's code to tmp file in build directory
         fs.writeFile(javaFile, code, (writeFileErr) => {
           if (writeFileErr) {
-            socket.emit('CODE_EXECUTED', {
+            socket.broadcast.emit('CODE_EXECUTED_' + id, {
               code: 1,
               err: {
                 desc: 'Unable to write code to build directory file.',
@@ -55,7 +55,7 @@ module.exports = (questions, dataStream) => (socket) => {
               if (compileExitCode !== 0) {
                 console.log(compileExitCode);
                 shell.rm(filesToDelete);
-                socket.emit('CODE_EXECUTED', {
+                socket.broadcast.emit('CODE_EXECUTED_' + id, {
                   code: compileExitCode,
                   err: {
                     desc: 'Compilation failed.',
@@ -68,7 +68,7 @@ module.exports = (questions, dataStream) => (socket) => {
                 shell.exec(`cd ${directory} && java ${filename}`, (runExitCode, runStdout, runStderr) => {
                   if (runExitCode !== 0) {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', {
+                    socket.broadcast.emit('CODE_EXECUTED_' + id, {
                       code: runExitCode,
                       err: {
                         desc: 'Execution failed.',
@@ -77,7 +77,7 @@ module.exports = (questions, dataStream) => (socket) => {
                     });
                   } else {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', { output: runStdout });
+                    socket.broadcast.emit('CODE_EXECUTED_' + id, { output: runStdout });
                   }
                 });
               }
@@ -91,7 +91,7 @@ module.exports = (questions, dataStream) => (socket) => {
         // Write user's code to tmp file in build directory
         fs.writeFile(cFile, code, (writeFileErr) => {
           if (writeFileErr) {
-            socket.emit('CODE_EXECUTED', {
+            socket.broadcast.emit('CODE_EXECUTED_' + id, {
               code: 1,
               err: {
                 desc: 'Unable to write code to build directory file.',
@@ -104,7 +104,7 @@ module.exports = (questions, dataStream) => (socket) => {
             shell.exec(`cd ${directory} && gcc ${filename}.c`, (compileExitCode, compileStdout, compileStderr) => {
               if (compileExitCode !== 0) {
                 shell.rm(filesToDelete);
-                socket.emit('CODE_EXECUTED', {
+                socket.broadcast.emit('CODE_EXECUTED_' + id, {
                   code: compileExitCode,
                   err: {
                     desc: 'Compilation failed.',
@@ -118,7 +118,7 @@ module.exports = (questions, dataStream) => (socket) => {
                 shell.exec(`cd ${directory} && ./a.out`, (runExitCode, runStdout, runStderr) => {
                   if (runExitCode !== 0) {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', {
+                    socket.broadcast.emit('CODE_EXECUTED_' + id, {
                       code: runExitCode,
                       err: {
                         desc: 'Execution failed.',
@@ -127,7 +127,7 @@ module.exports = (questions, dataStream) => (socket) => {
                     });
                   } else {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', { code: 0, output: runStdout });
+                    socket.broadcast.emit('CODE_EXECUTED_' + id, { code: 0, output: runStdout });
                   }
                 });
               }
