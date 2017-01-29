@@ -23,6 +23,8 @@ export default class EditorOptions extends React.Component {
     });
   }
 
+
+
   executeCode() {
     console.log(uniqueGlobalId());
     this.socket.emit('EXECUTE_CODE', {
@@ -37,6 +39,7 @@ export default class EditorOptions extends React.Component {
   render() {
     return (
       <div className={styles.editorOptions}>
+        <Button onClick={this.downloadCode}> Save Code </Button>
         <Button color="green" onClick={this.executeCode}
           className={styles.execute}>
           <Icon name="terminal" /> Execute

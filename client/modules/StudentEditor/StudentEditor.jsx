@@ -94,7 +94,6 @@ export default class StudentEditor extends React.Component {
   }
 
   render() {
-    console.log(`re-rendering student editor ${this.state.mode}`);
     return (
       <div className={styles.app}>
         <AceEditor
