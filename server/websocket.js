@@ -123,7 +123,7 @@ module.exports = dataStream => (socket) => {
                     });
                   } else {
                     shell.rm(filesToDelete);
-                    socket.emit('CODE_EXECUTED', { output: runStdout });
+                    socket.emit('CODE_EXECUTED', { code: 0, output: runStdout });
                   }
                 });
               }
