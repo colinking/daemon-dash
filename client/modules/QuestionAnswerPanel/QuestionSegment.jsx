@@ -1,11 +1,24 @@
 import React from 'react';
+import { Button, Card } from 'semantic-ui-react';
 
 export default class QuestionSegment extends React.Component {
   render() {
     return (
-      <div>
-        {JSON.stringify(this.props.question)}
-      </div>
+      <Card centered>
+        <Card.Content>
+          <Card.Meta>
+            {this.props.question.points}
+          </Card.Meta>
+          <Card.Description>
+            {this.props.question.body}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <Button>
+            {this.props.isStudent ? 'upvote' : 'delete' }
+          </Button>
+        </Card.Content>
+      </Card>
     );
   }
 }

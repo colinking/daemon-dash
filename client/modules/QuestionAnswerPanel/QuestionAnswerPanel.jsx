@@ -1,7 +1,10 @@
 import React from 'react';
 import io from 'socket.io-client';
+import { Card } from 'semantic-ui-react';
 
 import QuestionSegment from './QuestionSegment';
+
+import styles from './QuestionAnswerPanel.scss';
 
 export default class QuestionAnswerPanel extends React.Component {
 
@@ -65,12 +68,12 @@ export default class QuestionAnswerPanel extends React.Component {
       return b.points - a.points;
     });
     const listItems = questions.map((question) =>
-      <QuestionSegment key={question.id} question={question} />
+      <QuestionSegment key={question.id} question={question} isStudent={this.props.isStudent} />
     );
     return (
-      <div>
+      <Card.Group className={styles.componentWrapper}>
         {listItems}
-      </div>
+      </Card.Group>
     );
   }
 }
