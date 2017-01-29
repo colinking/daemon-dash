@@ -62,6 +62,12 @@ const userbase = [
     hash: 'craig',
     type: 'student',
   }),
+  new User({
+    name: 'Andrew Liu',
+    email: 'andrew@example.com',
+    hash: 'andrew',
+    type: 'student',
+  }),
 ];
 
 function saveAll(objects, done) {

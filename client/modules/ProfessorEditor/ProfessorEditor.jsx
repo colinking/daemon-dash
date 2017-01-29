@@ -4,11 +4,11 @@ import $ from 'jquery';
 import { browserHistory } from 'react-router';
 import IO from 'socket.io-client';
 
-import styles from './StudentView.scss';
+import styles from './ProfessorEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
 import EditorOptions from '../EditorOptions/EditorOptions';
 
-export default class StudentView extends React.Component {
+export default class ProfessorEditor extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,14 +16,11 @@ export default class StudentView extends React.Component {
     this.state = {
       code: '//stuff',
     };
+    this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
   }
 
   componentWillMount() {
-    this.socket.on('PROFESSOR_CODE_EDITED', (c) => {
-      this.editor.setText(c.text);
-      // this.setState({ code: c.text });
-    });
     $.get('/api/req', (resp) => {
       console.log(resp);
       if (!resp.isAuthenticated && resp.type !== 'professor') {
@@ -33,16 +30,22 @@ export default class StudentView extends React.Component {
   }
 
   getCode() {
-    // WTF?
-    return this.editor.editor.getValue();
+    return this.state.code;
+  }
+
+  handleChange(a, b) {
+    this.setState({ code: b.getValue() });
+    this.socket.emit('PROFESSOR_CODE_EDITED', { text: b.getValue() });
   }
 
   render() {
-    console.log('render');
     return (
       <div className={styles.app}>
         <EditorOptions getCode={this.getCode} />
-        <AceEditor code={this.state.code} ref={(r) => { this.editor = r; }} />
+        <AceEditor
+          onChange={this.handleChange}
+          readOnly={false}
+        />
       </div>
     );
   }
