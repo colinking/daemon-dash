@@ -1,8 +1,10 @@
 import React from 'react';
 
+import styles from './Layout.scss';
+
 export default function Layout(props) {
   return (
-    <div className="layout-content">{props.children}</div>
+    <div className={styles.layout}>{props.children}</div>
   );
 }
 
