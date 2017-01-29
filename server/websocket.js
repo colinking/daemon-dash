@@ -5,7 +5,6 @@ const mkdirp = require('mkdirp');
 const shell = require('shelljs');
 
 module.exports = (socket) => {
-  socket.emit('connected', { hello: 'world' });
   socket.emit('PROFESSOR_CODE_EDITED', dataStream[dataStream.length - 1] || { text: '//no code' });
   socket.on('PROFESSOR_CODE_EDITED', (d) => {
     dataStream.push(d);
@@ -79,5 +78,10 @@ module.exports = (socket) => {
         }
       });
     });
+  });
+
+  socket.on('mobile attached', () => {
+    console.log('mobile attached');
+    socket.broadcast.emit('mobile attached');
   });
 };
