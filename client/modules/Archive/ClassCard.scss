@@ -1,0 +1,23 @@
+
+.classcard {
+  max-width: 600px;
+  height: 300px;
+  border: 2px solid black;
+  border-radius: 7px;
+  margin: auto;
+  background-color: rgba(255, 0, 0, 0.8);
+  background-image: url(/public/archives/default.png);
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: center;
+}
+
+.classcard:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+.classcard h2 {
+  margin-top: 15px !important;
+  color: white !important;
+}

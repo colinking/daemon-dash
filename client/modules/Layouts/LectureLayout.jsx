@@ -11,7 +11,7 @@ export default class LectureLayout extends React.Component {
   render() {
     return (
       <div className={styles.lectureLayout}>
-        <MenuLayout></MenuLayout>
+        <MenuLayout activeTab="home" />
         <Grid columns={2} divided className={styles.grid}>
           <Grid.Column className={styles.column1}>
             <Grid.Row className={styles.videoPane}>

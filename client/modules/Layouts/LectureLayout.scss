@@ -14,18 +14,22 @@
   height: 8%;
 }
 
-:global(.ui.column).column1 {
-  padding: 0;
+.column1 {
+  padding: 0 !important;
+  width: 35% !important;
 }
 
 .column2 {
-  padding: 0;
+  padding: 0 !important;
+  width: 65% !important;
+  height: 100%;
 }
 
 .videoPane {
-  height: 50%;
+  height: 60%;
+  overflow: hidden;
 }
 
 .outputPane {
-  height: 50%;
+  height: 40%;
 }
