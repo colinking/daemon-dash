@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
+import $ from 'jquery';
+import { browserHistory } from 'react-router';
+import IO from 'socket.io-client';
 
 import styles from './ProfessorEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
-import IO from 'socket.io-client';
 
 export default class ProfessorEditor extends React.Component {
 
@@ -11,14 +13,23 @@ export default class ProfessorEditor extends React.Component {
     super(props);
     this.socket = IO();
     this.state = {
-      code: "\/\/stuff"
-    }
+      code: '//stuff',
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillMount() {
+    $.get('/api/req', (resp) => {
+      console.log(resp);
+      if (!resp.isAuthenticated && resp.type !== 'professor') {
+        browserHistory.push('/');
+      }
+    });
+  }
+
   handleChange(a, b) {
-    this.setState({code: b.getValue()});
-    this.socket.emit("PROFESSOR_CODE_EDITED", { text: b.getValue() });
+    this.setState({ code: b.getValue() });
+    this.socket.emit('PROFESSOR_CODE_EDITED', { text: b.getValue() });
   }
 
   render() {

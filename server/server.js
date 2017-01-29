@@ -4,9 +4,13 @@ import mongoose from 'mongoose';
 import path from 'path';
 import Socket from 'socket.io';
 import compression from 'compression';
+import passport from 'passport';
+import session from 'express-session';
+import bodyParser from 'body-parser';
 
 import render from './render';
 import websocket from './websocket';
+import api from './api';
 
 const app = express();
 const server = http.Server(app);
@@ -25,10 +29,42 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(compression());
 app.use('/public', express.static(path.join(__dirname, '../dist/public')));
 app.use('/public/css',
     express.static(path.join(__dirname, '../node_modules/semantic-ui-css')));
+
+const MongoStore = require('connect-mongo')(session);
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+  }),
+  resave: false,
+  saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+// pass passport for configuration
+require('./config/passport.js')(passport);
+
+// API methods
+app.get('/api/req', api.getReq);
+app.post('/api/login', (req, res, next) => {
+  passport.authenticate('local', (err, user) => {
+    if (!user) {
+      return res.json({ error: 'Invalid credentials.' });
+    }
+    return req.logIn(user, {}, () => res.json(user));
+  })(req, res, next);
+});
+app.post('/api/logout', api.postLogout);
 
 app.get('*', render);
 
