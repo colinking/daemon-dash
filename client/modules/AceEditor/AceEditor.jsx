@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Select } from 'semantic-ui-react';
+import { Select, Grid } from 'semantic-ui-react';
+
+import styles from './AceEditor.scss';
+
+import Execute from '../EditorOptions/EditorOptions';
 
 export default class AceEditor extends React.Component {
 
@@ -35,62 +39,74 @@ export default class AceEditor extends React.Component {
   }
 
   updateTheme(v, c) {
-    this.editor.setTheme('ace/theme/' + c.value);
+    this.editor.setTheme(`ace/theme/${c.value}`);
   }
 
   render() {
     const style = { fontSize: '14px !important', border: '1px solid lightgray' };
 
-    let themes = [
-      { value:"chrome", text: "Chrome" },
-      { value:"clouds", text: "Clouds" },
-      { value:"crimson_editor", text: "Crimson Editor" },
-      { value:"dawn", text: "Dawn" },
-      { value:"dreamweaver", text: "Dreamweaver" },
-      { value:"eclipse", text: "Eclipse" },
-      { value:"github", text: "GitHub" },
-      { value:"iplastic", text: "IPlastic" },
-      { value:"solarized_light", text: "Solarized Light" },
-      { value:"textmate", text: "TextMate" },
-      { value:"tomorrow", text: "Tomorrow" },
-      { value:"xcode", text: "XCode" },
-      { value:"kuroir", text: "Kuroir" },
-      { value:"katzenmilch", text: "KatzenMilch" },
-      { value:"sqlserver", text: "SQL Server" },
-      { value:"ambiance", text: "Ambiance" },
-      { value:"chaos", text: "Chaos" },
-      { value:"clouds_midnight", text: "Clouds Midnight" },
-      { value:"cobalt", text: "Cobalt" },
-      { value:"gruvbox", text: "Gruvbox" },
-      { value:"idle_fingers", text: "idle Fingers" },
-      { value:"kr_theme", text: "krTheme" },
-      { value:"merbivore", text: "Merbivore" },
-      { value:"merbivore_soft", text: "Merbivore Soft" },
-      { value:"mono_industrial", text: "Mono Industrial" },
-      { value:"monokai", text: "Monokai" },
-      { value:"pastel_on_dark", text: "Pastel on dark" },
-      { value:"solarized_dark", text: "Solarized Dark" },
-      { value:"terminal", text: "Terminal" },
-      { value:"tomorrow_night", text: "Tomorrow Night" },
-      { value:"tomorrow_night_blue", text: "Tomorrow Night Blue" },
-      { value:"tomorrow_night_bright", text: "Tomorrow Night Bright" },
-      { value:"tomorrow_night_eighties", text: "Tomorrow Night 80s" },
-      { value:"twilight", text: "Twilight" },
-      { value:"vibrant_ink", text: "Vibrant Ink" }
+    const themes = [
+      { value: 'chrome', text: 'Chrome' },
+      { value: 'clouds', text: 'Clouds' },
+      { value: 'crimson_editor', text: 'Crimson Editor' },
+      { value: 'dawn', text: 'Dawn' },
+      { value: 'dreamweaver', text: 'Dreamweaver' },
+      { value: 'eclipse', text: 'Eclipse' },
+      { value: 'github', text: 'GitHub' },
+      { value: 'iplastic', text: 'IPlastic' },
+      { value: 'solarized_light', text: 'Solarized Light' },
+      { value: 'textmate', text: 'TextMate' },
+      { value: 'tomorrow', text: 'Tomorrow' },
+      { value: 'xcode', text: 'XCode' },
+      { value: 'kuroir', text: 'Kuroir' },
+      { value: 'katzenmilch', text: 'KatzenMilch' },
+      { value: 'sqlserver', text: 'SQL Server' },
+      { value: 'ambiance', text: 'Ambiance' },
+      { value: 'chaos', text: 'Chaos' },
+      { value: 'clouds_midnight', text: 'Clouds Midnight' },
+      { value: 'cobalt', text: 'Cobalt' },
+      { value: 'gruvbox', text: 'Gruvbox' },
+      { value: 'idle_fingers', text: 'idle Fingers' },
+      { value: 'kr_theme', text: 'krTheme' },
+      { value: 'merbivore', text: 'Merbivore' },
+      { value: 'merbivore_soft', text: 'Merbivore Soft' },
+      { value: 'mono_industrial', text: 'Mono Industrial' },
+      { value: 'monokai', text: 'Monokai' },
+      { value: 'pastel_on_dark', text: 'Pastel on dark' },
+      { value: 'solarized_dark', text: 'Solarized Dark' },
+      { value: 'terminal', text: 'Terminal' },
+      { value: 'tomorrow_night', text: 'Tomorrow Night' },
+      { value: 'tomorrow_night_blue', text: 'Tomorrow Night Blue' },
+      { value: 'tomorrow_night_bright', text: 'Tomorrow Night Bright' },
+      { value: 'tomorrow_night_eighties', text: 'Tomorrow Night 80s' },
+      { value: 'twilight', text: 'Twilight' },
+      { value: 'vibrant_ink', text: 'Vibrant Ink' },
     ];
 
     return (
-      <div>
-        <div ref="root" style={style}>
+      <div className={styles.codePane}>
+        <div ref='root' className={styles.editorPane}>
           {this.props.code}
         </div>
-        <Select
-          compact
-          defaultValue="monokai"
-          placeholder="Select a theme..."
-          options={themes}
-          onChange={this.updateTheme}
-        />
+        <Grid columns={2} className={styles.editorMenu}>
+          <Grid.Column className={styles.embedMenu}>
+            <Grid.Row>
+              <Select
+                compact
+                defaultValue="monokai"
+                placeholder="Select a theme..."
+                options={themes}
+                onChange={this.updateTheme}
+                direction='upward'
+              />
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column className={styles.embedMenu}>
+            <Grid.Row>
+              <Execute />
+            </Grid.Row>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }
@@ -106,6 +122,6 @@ AceEditor.propTypes = {
 
 AceEditor.defaultProps = {
   mode: 'java',
-  code: '\/\/write your code here',
-  readOnly: false
+  code: '//write your code here',
+  readOnly: false,
 };

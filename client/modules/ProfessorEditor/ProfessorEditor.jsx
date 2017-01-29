@@ -41,11 +41,11 @@ export default class ProfessorEditor extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <EditorOptions getCode={this.getCode} />
-        <AceEditor
-          onChange={this.handleChange}
-        />
+        <AceEditor onChange={this.handleChange} />
       </div>
     );
   }
 }
+
+
+        //<EditorOptions getCode={this.getCode} />
