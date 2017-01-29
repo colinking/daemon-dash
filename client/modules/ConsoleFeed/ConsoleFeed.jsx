@@ -7,7 +7,7 @@ import { socket } from '../globals';
 
 import AceEditor from '../AceEditor/AceEditor';
 
-import styles from './ConsoleFeed.scss'
+import styles from './ConsoleFeed.scss';
 
 export default class ConsoleFeed extends React.Component {
 
@@ -24,17 +24,21 @@ export default class ConsoleFeed extends React.Component {
     this.editor.setOptions({ maxLines: 20 });
     this.editor.$blockScrolling = Infinity;
     this.editor.setReadOnly(true);
+    // this.editor.renderer.setShowGutter(false);
 
     socket.on('CODE_EXECUTED', (text) => {
-      this.editor.setValue(this.editor.getValue() + JSON.stringify(text) + "\n", 1);
+      if (text.err) {
+        this.editor.setValue(`${text.err.desc}\n${text.err.error}`, 1);
+      } else {
+        this.editor.setValue(`${text.output}\n`, 1);
+      }
     });
-
   }
 
   render() {
     return (
       <Segment attached className={styles.segment}>
-        <div ref='root' className={styles.editor}>
+        <div ref="root" className={styles.editor}>
           {this.props.code}
         </div>
       </Segment>
