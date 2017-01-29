@@ -64,7 +64,6 @@ export default class StudentEditor extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <EditorOptions getCode={this.getCode} />
         <AceEditor
           code={this.state.code}
           onChange={this.studentEditedCode}
