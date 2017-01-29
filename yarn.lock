@@ -1380,6 +1380,10 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
+dateonly@1.x:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/dateonly/-/dateonly-1.1.1.tgz#beef65c5bd8a0a5d948819c4f7239e8938f6f7f1"
+
 debug@2.2.0, debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
@@ -3082,6 +3086,12 @@ mongodb@2.2.22, "mongodb@>= 1.2.0 <3.0.0":
     es6-promise "3.2.1"
     mongodb-core "2.1.7"
     readable-stream "2.1.5"
+
+mongoose-dateonly@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/mongoose-dateonly/-/mongoose-dateonly-1.0.3.tgz#f2aed20062d95bc89adb8c1d9a4514330a103f86"
+  dependencies:
+    dateonly "1.x"
 
 mongoose@^4.7.6:
   version "4.7.9"
