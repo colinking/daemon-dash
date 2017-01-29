@@ -1,7 +1,23 @@
 import React from 'react';
 import { Button, Card } from 'semantic-ui-react';
+import io from 'socket.io-client';
 
 export default class QuestionSegment extends React.Component {
+
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.socket = io();
+  }
+
+  handleSubmit() {
+    if (this.props.isStudent) {
+      this.socket.emit('qa upvote', this.props.question.id);
+    } else {
+      this.socket.emit('qa delete', this.props.question.id);
+    }
+  }
+
   render() {
     return (
       <Card centered fluid>
@@ -14,7 +30,7 @@ export default class QuestionSegment extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button>
+          <Button onClick={this.handleSubmit}>
             {this.props.isStudent ? 'upvote' : 'delete' }
           </Button>
         </Card.Content>

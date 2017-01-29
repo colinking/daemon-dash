@@ -22,7 +22,6 @@ export default class QuestionAnswerPanel extends React.Component {
       questions: [],
     }
     this.socket = io();
-    this.socket.emit('qa fetchall');
     this.deepCopy = this.deepCopy.bind(this);
 
     this.socket.on('qa fetchall resp', (vals) => {
@@ -47,6 +46,8 @@ export default class QuestionAnswerPanel extends React.Component {
       });
     });
     this.socket.on('qa delete resp', (qid) => {
+      console.log('QA DELETE RESP');
+      console.log(qid);
       let questions = this.deepCopy(this.state.questions);
       let removed = [];
       for (let i = 0; i < questions.length; i++) {
@@ -55,10 +56,15 @@ export default class QuestionAnswerPanel extends React.Component {
         }
       }
       this.setState({
-        questions: questions,
+        questions: removed,
       });
+      console.log(this.state.questions);
 
     });
+  }
+
+  componentWillMount() {
+    this.socket.emit('qa fetchall');
   }
 
   render() {
