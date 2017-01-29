@@ -3,6 +3,7 @@ import React from 'react';
 // import $ from 'jquery';
 import { Button, Icon } from 'semantic-ui-react';
 import io from 'socket.io-client';
+import FileSaver from 'file-saver';
 
 import {uniqueGlobalId} from '../../global'
 
@@ -13,6 +14,7 @@ export default class EditorOptions extends React.Component {
   constructor(props) {
     super(props);
     this.executeCode = this.executeCode.bind(this);
+    this.downloadCode = this.downloadCode.bind(this);
     this.socket = io();
     this.socket.on('CODE_EXECUTED', (resp) => {
       if (resp.err) {
@@ -21,6 +23,15 @@ export default class EditorOptions extends React.Component {
         console.log(resp.output);
       }
     });
+  }
+
+  downloadCode() {
+    let filename = 'lecture_code.c';
+    if (this.props.mode === 'java') {
+      filename = 'lecture_code.java';
+    }
+    let blob = new Blob([this.props.getCode()], {type: "text/plain;charset=utf-8"});
+    FileSaver.saveAs(blob, filename);
   }
 
   executeCode() {
