@@ -8,6 +8,11 @@ export default class ConsoleFeed extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      feed: [
+
+      ]
+    }
 
     this.socket = IO();
 

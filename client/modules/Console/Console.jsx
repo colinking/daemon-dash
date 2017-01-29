@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Menu, Segment } from 'semantic-ui-react';
 
-import QA from '../QA/QA';
+import QuestionAnswerPanel from '../QuestionAnswerPanel/QuestionAnswerPanel';
 import ConsoleFeed from '../ConsoleFeed/ConsoleFeed';
 
 export default class Console extends React.Component {
@@ -26,7 +26,7 @@ export default class Console extends React.Component {
           <Menu.Item name='QA' active={activeItem === 'QA'} onClick={this.handleItemClick} />
         </Menu>
         { this.state.activeItem === 'Console' ? <ConsoleFeed /> : null}
-        { this.state.activeItem === 'QA' ? <QA /> : null}
+        { this.state.activeItem === 'QA' ? <QuestionAnswerPanel /> : null}
       </div>
     )
   }
