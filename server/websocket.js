@@ -12,6 +12,10 @@ module.exports = (socket) => {
     socket.broadcast.emit('PROFESSOR_CODE_EDITED', d);
   });
 
+  socket.on("REQUEST_LATEST_CHANGE", () => {
+    socket.emit("RECIEVE_LATEST_CHANGE", dataStream[dataStream.length - 1] || {test: "//no code"});
+  });
+
   // Code execution endpoints
   socket.on('EXECUTE_CODE', ({ code }) => {
     console.log('Received code');
