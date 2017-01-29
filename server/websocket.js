@@ -5,11 +5,14 @@ const mkdirp = require('mkdirp');
 const shell = require('shelljs');
 
 module.exports = (socket) => {
-  socket.emit('connected', { hello: 'world' });
   socket.emit('PROFESSOR_CODE_EDITED', dataStream[dataStream.length - 1] || { text: '//no code' });
   socket.on('PROFESSOR_CODE_EDITED', (d) => {
     dataStream.push(d);
     socket.broadcast.emit('PROFESSOR_CODE_EDITED', d);
+  });
+
+  socket.on("REQUEST_LATEST_CHANGE", () => {
+    socket.emit("RECIEVE_LATEST_CHANGE", dataStream[dataStream.length - 1] || {test: "//no code"});
   });
 
   // Code execution endpoints
@@ -79,5 +82,10 @@ module.exports = (socket) => {
         }
       });
     });
+  });
+
+  socket.on('mobile attached', () => {
+    console.log('mobile attached');
+    socket.broadcast.emit('mobile attached');
   });
 };

@@ -3,9 +3,20 @@ import { browserHistory } from 'react-router';
 import $ from 'jquery';
 import { Menu, Button } from 'semantic-ui-react';
 
+import IO from 'socket.io-client';
+
 import styles from './LectureLayout.scss';
 
 export default class MenuLayout extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.socket = IO();
+
+    this.startRecordSession = this.startRecordSession.bind(this);
+    this.endRecordSession = this.endRecordSession.bind(this);
+  }
 
   static logout() {
     $.post('/api/logout', (resp) => {
@@ -15,6 +26,14 @@ export default class MenuLayout extends React.Component {
         console.error(resp.error);
       }
     });
+  }
+
+  startRecordSession() {
+    this.socket.emit("START_RECORD_SESSION", {name: "SOME RANDOM SESSION"});
+  }
+
+  endRecordSession() {
+    this.socket.emit('END_RECORD_SESSION');
   }
 
   render() {

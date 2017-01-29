@@ -64,7 +64,6 @@ export default class RecordingPage extends React.Component {
   }
 
   handleStartRecording() {
-    // TODO disable start button
     navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true,
@@ -120,7 +119,7 @@ export default class RecordingPage extends React.Component {
           type: 'POST',
           url: '/nonce',
           success: (data) => {
-            socket.emit('device found', 'joining room');
+            socket.emit('mobile attached', {});
             webrtc.joinRoom(data.nonce);
           },
         });

@@ -6,7 +6,6 @@ import IO from 'socket.io-client';
 
 import styles from './StudentEditor.scss';
 import AceEditor from '../AceEditor/AceEditor';
-import EditorOptions from '../EditorOptions/EditorOptions';
 
 const LIVE = 'This code is from live.';
 const BRANCH = 'This code is locally modified.';
@@ -37,6 +36,10 @@ export default class StudentEditor extends React.Component {
 
   componentWillMount() {
     this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
+    this.socket.on('RECIEVE_LATEST_CHANGE', (cl) => {
+      this.updateText(cl);
+      this.setState({ status: LIVE });
+    });
 
     $.get('/api/req', (resp) => {
       if (!resp.isAuthenticated && resp.type !== 'professor') {
@@ -58,13 +61,12 @@ export default class StudentEditor extends React.Component {
 
   goToLive() {
     this.socket.on('PROFESSOR_CODE_EDITED', this.updateText);
-    this.setState({ status: LIVE });
+    this.socket.emit("REQUEST_LATEST_CHANGE");
   }
 
   render() {
     return (
       <div className={styles.app}>
-        <EditorOptions getCode={this.getCode} />
         <AceEditor
           code={this.state.code}
           onChange={this.studentEditedCode}
