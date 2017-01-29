@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Select } from 'semantic-ui-react';
+import { Select, Grid } from 'semantic-ui-react';
+
+import styles from './AceEditor.scss';
+
+import Execute from '../EditorOptions/EditorOptions';
 
 export default class AceEditor extends React.Component {
 
@@ -80,17 +84,29 @@ export default class AceEditor extends React.Component {
     ];
 
     return (
-      <div>
-        <div ref="root" style={style}>
+      <div className={styles.codePane}>
+        <div ref='root' className={styles.editorPane}>
           {this.props.code}
         </div>
-        <Select
-          compact
-          defaultValue="monokai"
-          placeholder="Select a theme..."
-          options={themes}
-          onChange={this.updateTheme}
-        />
+        <Grid columns={2} className={styles.editorMenu}>
+          <Grid.Column className={styles.embedMenu}>
+            <Grid.Row>
+              <Select
+                compact
+                defaultValue="monokai"
+                placeholder="Select a theme..."
+                options={themes}
+                onChange={this.updateTheme}
+                direction='upward'
+              />
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column className={styles.embedMenu}>
+            <Grid.Row>
+              <Execute />
+            </Grid.Row>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }
