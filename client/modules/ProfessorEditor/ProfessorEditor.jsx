@@ -34,12 +34,10 @@ export default class ProfessorEditor extends React.Component {
 
   render() {
     return (
-      <div className={styles.app}>
-        <AceEditor
-          onChange={this.handleChange}
-          readOnly={false}
-        />
-      </div>
+      <AceEditor
+        onChange={this.handleChange}
+        readOnly={false}
+      />
     );
   }
 }

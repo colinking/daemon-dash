@@ -31,9 +31,7 @@ export default class StudentEditor extends React.Component {
 
   render() {
     return (
-      <div className={styles.app}>
-        <AceEditor code={this.state.code} ref={(r) => { this.editor = r; }} />
-      </div>
+      <AceEditor code={this.state.code} ref={(r) => { this.editor = r; }} />
     );
   }
 }
